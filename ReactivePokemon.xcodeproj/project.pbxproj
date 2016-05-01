@@ -12,9 +12,16 @@
 		8E7C4D691CD55ABE008AE2E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C4D671CD55ABE008AE2E2 /* Main.storyboard */; };
 		8E7C4D6B1CD55ABE008AE2E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C4D6A1CD55ABE008AE2E2 /* Assets.xcassets */; };
 		8E7C4D6E1CD55ABE008AE2E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C4D6C1CD55ABE008AE2E2 /* LaunchScreen.storyboard */; };
+		8EEBACE21CD571F000F40F96 /* PokeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEBACE11CD571F000F40F96 /* PokeAPI.swift */; };
+		8EEBACE41CD5744800F40F96 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEBACE31CD5744800F40F96 /* Provider.swift */; };
+		8EEBACE61CD5750D00F40F96 /* PokemonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEBACE51CD5750D00F40F96 /* PokemonService.swift */; };
+		8EEBACE81CD5756200F40F96 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEBACE71CD5756200F40F96 /* Pokemon.swift */; };
+		FA64D850AE57FFC674C68283 /* Pods_ReactivePokemon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AB0AE4A2E342E1A3C89F97 /* Pods_ReactivePokemon.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		111D404A04D03FD55EC6F220 /* Pods-ReactivePokemon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactivePokemon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactivePokemon/Pods-ReactivePokemon.debug.xcconfig"; sourceTree = "<group>"; };
+		5153F99D67C5299E73143E71 /* Pods-ReactivePokemon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactivePokemon.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactivePokemon/Pods-ReactivePokemon.release.xcconfig"; sourceTree = "<group>"; };
 		8E7C4D601CD55ABE008AE2E2 /* ReactivePokemon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactivePokemon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E7C4D631CD55ABE008AE2E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E7C4D651CD55ABE008AE2E2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +29,11 @@
 		8E7C4D6A1CD55ABE008AE2E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E7C4D6D1CD55ABE008AE2E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E7C4D6F1CD55ABE008AE2E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8EEBACE11CD571F000F40F96 /* PokeAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokeAPI.swift; sourceTree = "<group>"; };
+		8EEBACE31CD5744800F40F96 /* Provider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		8EEBACE51CD5750D00F40F96 /* PokemonService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonService.swift; sourceTree = "<group>"; };
+		8EEBACE71CD5756200F40F96 /* Pokemon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
+		D4AB0AE4A2E342E1A3C89F97 /* Pods_ReactivePokemon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactivePokemon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +41,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA64D850AE57FFC674C68283 /* Pods_ReactivePokemon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		17C0BBD48C492A184CBAD066 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D4AB0AE4A2E342E1A3C89F97 /* Pods_ReactivePokemon.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8E7C4D571CD55ABE008AE2E2 = {
 			isa = PBXGroup;
 			children = (
 				8E7C4D621CD55ABE008AE2E2 /* ReactivePokemon */,
 				8E7C4D611CD55ABE008AE2E2 /* Products */,
+				9EA4209D23E1AC2F05D68DEB /* Pods */,
+				17C0BBD48C492A184CBAD066 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +77,27 @@
 		8E7C4D621CD55ABE008AE2E2 /* ReactivePokemon */ = {
 			isa = PBXGroup;
 			children = (
+				8E7C4D6F1CD55ABE008AE2E2 /* Info.plist */,
 				8E7C4D631CD55ABE008AE2E2 /* AppDelegate.swift */,
+				8EEBACE11CD571F000F40F96 /* PokeAPI.swift */,
+				8EEBACE71CD5756200F40F96 /* Pokemon.swift */,
+				8EEBACE51CD5750D00F40F96 /* PokemonService.swift */,
+				8EEBACE31CD5744800F40F96 /* Provider.swift */,
 				8E7C4D651CD55ABE008AE2E2 /* ViewController.swift */,
-				8E7C4D671CD55ABE008AE2E2 /* Main.storyboard */,
 				8E7C4D6A1CD55ABE008AE2E2 /* Assets.xcassets */,
 				8E7C4D6C1CD55ABE008AE2E2 /* LaunchScreen.storyboard */,
-				8E7C4D6F1CD55ABE008AE2E2 /* Info.plist */,
+				8E7C4D671CD55ABE008AE2E2 /* Main.storyboard */,
 			);
 			path = ReactivePokemon;
+			sourceTree = "<group>";
+		};
+		9EA4209D23E1AC2F05D68DEB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				111D404A04D03FD55EC6F220 /* Pods-ReactivePokemon.debug.xcconfig */,
+				5153F99D67C5299E73143E71 /* Pods-ReactivePokemon.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +107,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E7C4D721CD55ABE008AE2E2 /* Build configuration list for PBXNativeTarget "ReactivePokemon" */;
 			buildPhases = (
+				D10B41B03A8BFFF7F32D3010 /* 📦 Check Pods Manifest.lock */,
 				8E7C4D5C1CD55ABE008AE2E2 /* Sources */,
 				8E7C4D5D1CD55ABE008AE2E2 /* Frameworks */,
 				8E7C4D5E1CD55ABE008AE2E2 /* Resources */,
+				A9DC3895F4AB560542FCE1C6 /* 📦 Embed Pods Frameworks */,
+				B45D11212BB2D6F22944E675 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -129,13 +168,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A9DC3895F4AB560542FCE1C6 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactivePokemon/Pods-ReactivePokemon-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B45D11212BB2D6F22944E675 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactivePokemon/Pods-ReactivePokemon-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D10B41B03A8BFFF7F32D3010 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8E7C4D5C1CD55ABE008AE2E2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EEBACE61CD5750D00F40F96 /* PokemonService.swift in Sources */,
+				8EEBACE41CD5744800F40F96 /* Provider.swift in Sources */,
+				8EEBACE21CD571F000F40F96 /* PokeAPI.swift in Sources */,
 				8E7C4D661CD55ABE008AE2E2 /* ViewController.swift in Sources */,
 				8E7C4D641CD55ABE008AE2E2 /* AppDelegate.swift in Sources */,
+				8EEBACE81CD5756200F40F96 /* Pokemon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +339,7 @@
 		};
 		8E7C4D731CD55ABE008AE2E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 111D404A04D03FD55EC6F220 /* Pods-ReactivePokemon.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ReactivePokemon/Info.plist;
@@ -259,6 +351,7 @@
 		};
 		8E7C4D741CD55ABE008AE2E2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5153F99D67C5299E73143E71 /* Pods-ReactivePokemon.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ReactivePokemon/Info.plist;
@@ -287,6 +380,7 @@
 				8E7C4D741CD55ABE008AE2E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
