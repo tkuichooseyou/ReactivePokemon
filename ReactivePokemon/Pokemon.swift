@@ -15,6 +15,14 @@ struct PokemonType {
 struct Type {
     let url: String
     let name: String
+
+    var id: String {
+        guard let result = url.characters.split("/").map(String.init).last else {
+            assertionFailure("Pokemon type ID missing")
+            return ""
+        }
+        return result
+    }
 }
 
 extension Pokemon : Decodable {

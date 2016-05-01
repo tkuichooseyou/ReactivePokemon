@@ -16,6 +16,7 @@
 		8EEBACE41CD5744800F40F96 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEBACE31CD5744800F40F96 /* Provider.swift */; };
 		8EEBACE61CD5750D00F40F96 /* PokemonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEBACE51CD5750D00F40F96 /* PokemonService.swift */; };
 		8EEBACE81CD5756200F40F96 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEBACE71CD5756200F40F96 /* Pokemon.swift */; };
+		8EEBACEC1CD58F0E00F40F96 /* pokemon1.json in Resources */ = {isa = PBXBuildFile; fileRef = 8EEBACEB1CD58F0E00F40F96 /* pokemon1.json */; };
 		FA64D850AE57FFC674C68283 /* Pods_ReactivePokemon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AB0AE4A2E342E1A3C89F97 /* Pods_ReactivePokemon.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		8EEBACE31CD5744800F40F96 /* Provider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		8EEBACE51CD5750D00F40F96 /* PokemonService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonService.swift; sourceTree = "<group>"; };
 		8EEBACE71CD5756200F40F96 /* Pokemon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
+		8EEBACEB1CD58F0E00F40F96 /* pokemon1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pokemon1.json; sourceTree = "<group>"; };
 		D4AB0AE4A2E342E1A3C89F97 /* Pods_ReactivePokemon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactivePokemon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -87,6 +89,7 @@
 				8E7C4D6A1CD55ABE008AE2E2 /* Assets.xcassets */,
 				8E7C4D6C1CD55ABE008AE2E2 /* LaunchScreen.storyboard */,
 				8E7C4D671CD55ABE008AE2E2 /* Main.storyboard */,
+				8EEBACEB1CD58F0E00F40F96 /* pokemon1.json */,
 			);
 			path = ReactivePokemon;
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 				8E7C4D6E1CD55ABE008AE2E2 /* LaunchScreen.storyboard in Resources */,
 				8E7C4D6B1CD55ABE008AE2E2 /* Assets.xcassets in Resources */,
 				8E7C4D691CD55ABE008AE2E2 /* Main.storyboard in Resources */,
+				8EEBACEC1CD58F0E00F40F96 /* pokemon1.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
