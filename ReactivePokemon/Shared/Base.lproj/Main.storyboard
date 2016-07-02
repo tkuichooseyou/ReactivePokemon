@@ -1,60 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EUd-Ma-yQF">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Navigation Controller-->
+        <scene sceneID="d87-E3-1cd">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ReactivePokemon" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Pokemon" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xSP-W2-Fkq">
-                                <rect key="frame" x="20" y="20" width="560" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                            </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Lx8-t1-rii">
-                                <rect key="frame" x="20" y="60" width="560" height="540"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="xSP-W2-Fkq" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="4rh-8A-Ivb"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Lx8-t1-rii" secondAttribute="trailing" id="CJl-LD-UOI"/>
-                            <constraint firstItem="Lx8-t1-rii" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="Jyo-lh-WrZ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="xSP-W2-Fkq" secondAttribute="trailing" id="Kk9-aG-haA"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="Lx8-t1-rii" secondAttribute="leading" id="REl-7A-m3S"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="xSP-W2-Fkq" secondAttribute="leading" id="RvR-KI-WHF"/>
-                            <constraint firstItem="Lx8-t1-rii" firstAttribute="top" secondItem="xSP-W2-Fkq" secondAttribute="bottom" constant="10" id="neu-bQ-td2"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Lx8-t1-rii" secondAttribute="bottom" id="yHi-uV-3AM"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="Jyo-lh-WrZ"/>
-                            </mask>
-                        </variation>
-                    </view>
+                <navigationController id="EUd-Ma-yQF" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jir-ZK-Dtg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
                     <connections>
-                        <outlet property="searchTextField" destination="xSP-W2-Fkq" id="mdo-fD-ydx"/>
-                        <outlet property="textView" destination="Lx8-t1-rii" id="i0s-83-EhY"/>
+                        <segue destination="BqX-a0-NHc" kind="relationship" relationship="rootViewController" id="8PW-bm-Tzh"/>
                     </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bi9-dJ-K7m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="390" y="363"/>
+            <point key="canvasLocation" x="-479" y="486"/>
+        </scene>
+        <!--PokemonList-->
+        <scene sceneID="uE6-PE-6K3">
+            <objects>
+                <viewControllerPlaceholder storyboardName="PokemonList" id="BqX-a0-NHc" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="YdT-Kg-W1S"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6VE-PN-AVf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="28" y="486"/>
         </scene>
     </scenes>
 </document>

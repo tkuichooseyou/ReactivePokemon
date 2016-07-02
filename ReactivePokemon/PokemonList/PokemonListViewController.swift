@@ -3,7 +3,7 @@ import ReactiveCocoa
 import Moya
 import Result
 
-final class ViewController: UIViewController {
+final class PokemonListViewController: UIViewController {
     private let pokemonService = PokemonService()
     @IBOutlet private weak var textView: UITextView!
     @IBOutlet private weak var searchTextField: UITextField! {
