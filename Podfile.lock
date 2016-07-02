@@ -1,39 +1,30 @@
 PODS:
-  - Alamofire (3.3.1)
+  - Alamofire (3.4.1)
   - Argo (3.0.1)
-  - Curry (2.2.0)
-  - Moya/Core (6.4.0):
+  - Curry (2.3.1)
+  - Moya/Core (6.5.0):
     - Alamofire (~> 3.0)
     - Result (~> 2.0)
-  - Moya/ReactiveCocoa (6.4.0):
+  - Moya/ReactiveCocoa (6.5.0):
     - Moya/Core
     - ReactiveCocoa (~> 4.1)
-  - ReactiveCocoa (4.1.0):
-    - ReactiveCocoa/UI (= 4.1.0)
+  - ReactiveCocoa (4.2.1):
     - Result (~> 2.0)
-  - ReactiveCocoa/Core (4.1.0):
-    - ReactiveCocoa/no-arc
-    - Result (~> 2.0)
-  - ReactiveCocoa/no-arc (4.1.0):
-    - Result (~> 2.0)
-  - ReactiveCocoa/UI (4.1.0):
-    - ReactiveCocoa/Core
-    - Result (~> 2.0)
-  - Result (2.0.0)
+  - Result (2.1.2)
 
 DEPENDENCIES:
   - Argo
   - Curry
-  - Moya/ReactiveCocoa (~> 6.4)
+  - Moya/ReactiveCocoa
 
 SPEC CHECKSUMS:
-  Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
+  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
   Argo: 22c5d62b7967020a641468c91dc9488bea9523b8
-  Curry: c22d80fff7f5a4b1bbd531455c3e2dbb099658a3
-  Moya: 4d526954c8afd79820991393d40d7d8af756ceee
-  ReactiveCocoa: d70004d7a366a7b8e87e60ce2347182c77701949
-  Result: 9e75e1111c774c6ac594e14907b15057053a7959
+  Curry: c8f65c8ade091aad5cb86f7b51dd408d698810ca
+  Moya: f7a4044719381cc6299f9ad3e0ef05f426f0557b
+  ReactiveCocoa: 5a42745f11ea236f405bb9ce5e97c5e3b23562dd
+  Result: 6e722d4a66b1408680dbfcdf51c0b1c4b706316a
 
-PODFILE CHECKSUM: c6c1b7f1afa11fc6c7c6defad0d9b3e272bd44d6
+PODFILE CHECKSUM: 2ecf75b8361e58afc611d985c8e9c841bc06e9bb
 
-COCOAPODS: 1.0.0.beta.8
+COCOAPODS: 1.0.1
