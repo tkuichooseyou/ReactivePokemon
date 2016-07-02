@@ -1,14 +1,19 @@
-platform :ios, '9.0'
+platform :ios, '9.2'
 use_frameworks!
 inhibit_all_warnings!
 
-target 'ReactivePokemon' do
+def general_pods
   pod 'Moya/ReactiveCocoa'
   pod 'Argo'
   pod 'Curry'
 end
 
+target 'ReactivePokemon' do
+  general_pods
+end
+
 target 'ReactivePokemonTests' do
+  general_pods
   pod 'Quick'
   pod 'Nimble'
 end
