@@ -1,6 +1,7 @@
 import Moya
 
 enum PokeAPI {
+    case PokemonList
     case Pokemon(id: String)
     case Type(id: String)
 
@@ -14,6 +15,7 @@ extension PokeAPI : TargetType {
 
     var path: String {
         switch self {
+        case .PokemonList: return "/pokemon"
         case .Pokemon(let id): return "/pokemon/\(id)"
         case .Type(let id): return "/type/\(id)"
         }
@@ -21,18 +23,20 @@ extension PokeAPI : TargetType {
 
     var method: Moya.Method {
         switch self {
-        case .Pokemon, .Type: return .GET
+        case .PokemonList, .Pokemon, .Type: return .GET
         }
     }
 
     var parameters: [String: AnyObject]? {
         switch self {
-        case .Pokemon, .Type: return nil
+        case .PokemonList, .Pokemon, .Type: return nil
         }
     }
 
     var sampleData: NSData {
         switch self {
+        case .PokemonList:
+            return NSData()
         case .Pokemon:
             return NSData()
         case .Type:

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PokemonCell" id="7bi-Fc-8HD" customClass="PokemonCell" customModule="ReactivePokemon" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="411" height="77"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="411" height="77"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pokeball" translatesAutoresizingMaskIntoConstraints="NO" id="StL-lX-I9P">
+                        <rect key="frame" x="8" y="8" width="68" height="61"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bulbasaur - placeholder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6M2-O0-C3O">
+                        <rect key="frame" x="96" y="28" width="183" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="StL-lX-I9P" secondAttribute="trailing" constant="335" id="2jk-Zf-1Pc"/>
+                <constraint firstAttribute="bottom" secondItem="StL-lX-I9P" secondAttribute="bottom" constant="8" id="8bM-g3-mVH"/>
+                <constraint firstItem="StL-lX-I9P" firstAttribute="top" secondItem="7bi-Fc-8HD" secondAttribute="top" constant="8" id="jlC-rh-JMv"/>
+                <constraint firstItem="StL-lX-I9P" firstAttribute="leading" secondItem="7bi-Fc-8HD" secondAttribute="leading" constant="8" id="nzN-b3-ZfQ"/>
+                <constraint firstItem="6M2-O0-C3O" firstAttribute="centerY" secondItem="StL-lX-I9P" secondAttribute="centerY" id="rDK-VB-hrt"/>
+                <constraint firstItem="6M2-O0-C3O" firstAttribute="leading" secondItem="StL-lX-I9P" secondAttribute="trailing" constant="20" id="wLd-kk-yjC"/>
+            </constraints>
+            <size key="customSize" width="411" height="77"/>
+            <connections>
+                <outlet property="imageView" destination="StL-lX-I9P" id="HUN-uq-zvx"/>
+                <outlet property="nameLabel" destination="6M2-O0-C3O" id="58w-kH-9lf"/>
+            </connections>
+            <point key="canvasLocation" x="424.5" y="129.5"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="pokeball" width="128" height="128"/>
+    </resources>
+</document>

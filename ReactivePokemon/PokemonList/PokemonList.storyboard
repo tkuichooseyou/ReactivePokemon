@@ -23,33 +23,27 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ANN-pS-4AP">
-                                <rect key="frame" x="20" y="68" width="560" height="532"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5NE-D6-Zuw" customClass="PokemonListCollectionView" customModule="ReactivePokemon" customModuleProvider="target">
+                                <rect key="frame" x="20" y="66" width="560" height="534"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VnK-8h-lzz">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Sg6-RX-SXF" firstAttribute="top" secondItem="ANN-pS-4AP" secondAttribute="bottom" id="Ina-ws-8PC"/>
-                            <constraint firstItem="ANN-pS-4AP" firstAttribute="top" secondItem="JtU-Mc-GEz" secondAttribute="bottom" constant="20" id="OFZ-ib-N1b"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ANN-pS-4AP" secondAttribute="trailing" id="R1U-34-uLL"/>
                             <constraint firstItem="IlY-K1-A1n" firstAttribute="top" secondItem="JtU-Mc-GEz" secondAttribute="bottom" constant="8" id="Vai-d5-ook"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="ANN-pS-4AP" secondAttribute="leading" id="YvG-g9-aoI"/>
-                            <constraint firstItem="ANN-pS-4AP" firstAttribute="top" secondItem="IlY-K1-A1n" secondAttribute="bottom" constant="10" id="Z7L-UM-Bgt"/>
                             <constraint firstAttribute="trailingMargin" secondItem="IlY-K1-A1n" secondAttribute="trailing" id="Zz2-AZ-2xg"/>
                             <constraint firstAttribute="leadingMargin" secondItem="IlY-K1-A1n" secondAttribute="leading" id="mxk-l9-ZtI"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="OFZ-ib-N1b"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
+                        <outlet property="collectionView" destination="5NE-D6-Zuw" id="7ME-Ws-f6O"/>
                         <outlet property="searchTextField" destination="IlY-K1-A1n" id="sEv-e5-zmB"/>
-                        <outlet property="textView" destination="ANN-pS-4AP" id="lT0-Uy-4Tt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GA9-Gp-wS4" sceneMemberID="firstResponder"/>

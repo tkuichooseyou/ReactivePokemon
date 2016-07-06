@@ -4,23 +4,18 @@ import Moya
 import Result
 
 final class PokemonListViewController: UIViewController {
-    private let pokemonService = PokemonService()
-    @IBOutlet private weak var textView: UITextView!
+    @IBOutlet private weak var collectionView: PokemonListCollectionView!
     @IBOutlet private weak var searchTextField: UITextField! {
         didSet {
-            searchTextField.rac_textSignal().toSignalProducer()
-                .map { $0 as! String }
-                .flatMapError { _ in return SignalProducer<String, NoError>.empty }
-                .throttle(0.5, onScheduler: QueueScheduler())
-                .flatMap(.Latest, transform: pokemonService.getPokemonByID)
-                .map(pokemonDescription)
-                .observeOn(UIScheduler())
-                .startWithNext(updateTextView)
+//            searchTextField.rac_textSignal().toSignalProducer()
+//                .map { $0 as! String }
+//                .flatMapError { _ in return SignalProducer<String, NoError>.empty }
+//                .throttle(0.5, onScheduler: QueueScheduler())
+//                .flatMap(.Latest, transform: pokemonService.getPokemonByID)
+//                .map(pokemonDescription)
+//                .observeOn(UIScheduler())
+//                .startWithNext(updateTextView)
         }
-    }
-
-    private func updateTextView(string: String) {
-        textView.text = string
     }
 
     private func pokemonDescription(pokemon: Pokemon?) -> String {
@@ -31,3 +26,46 @@ final class PokemonListViewController: UIViewController {
     }
 }
 
+final class PokemonListCollectionView: UICollectionView {
+    private let pokemonListViewModel: PokemonListViewModelType = PokemonListViewModel()
+    private var disposable: Disposable?
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+
+    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+        super.init(frame: frame, collectionViewLayout: layout)
+        setup()
+    }
+
+    deinit {
+        disposable?.dispose()
+    }
+
+    private func setup() {
+        delegate = self
+        dataSource = self
+        register(PokemonCell)
+        disposable = pokemonListViewModel.cellUpdaters.producer.startWithNext { [weak self] _ in
+            self?.reloadData()
+        }
+    }
+}
+
+extension PokemonListCollectionView: UICollectionViewDataSource {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return pokemonListViewModel.numberOfItemsInSection(section)
+    }
+
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cellUpdater = pokemonListViewModel.cellUpdaters.value[indexPath.row]
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellUpdater.reuseIdentifier, forIndexPath: indexPath)
+        cellUpdater.updateCell(cell)
+        return cell
+    }
+}
+
+extension PokemonListCollectionView: UICollectionViewDelegate {
+}
