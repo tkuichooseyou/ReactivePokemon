@@ -1,4 +1,5 @@
 import UIKit
+import Haneke
 
 final class PokemonCell: UICollectionViewCell {
     @IBOutlet private weak var imageView: UIImageView!
@@ -11,7 +12,10 @@ extension PokemonCell : UpdatableView {
     func update(viewModel viewModel: ViewModel) {
         imageView.image = ImagesCatalog.pokeballImage
 
-//        viewModel.imageURL.flatMap { imageView.hnk_setImageFromURL($0) }
+        viewModel.imageURL.startWithNext { [weak imageView] in
+            guard let url = $0 else { return }
+            imageView?.hnk_setImageFromURL(url)
+        }
         nameLabel.text = viewModel.nameText
     }
 }

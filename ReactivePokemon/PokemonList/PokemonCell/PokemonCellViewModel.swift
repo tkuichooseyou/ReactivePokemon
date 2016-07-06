@@ -8,20 +8,22 @@ protocol PokemonCellViewModelType {
 }
 
 struct PokemonCellViewModel : PokemonCellViewModelType {
-    let pokemonService: PokemonService
+    private let pokemonService: PokemonService
+    private let pokemon = MutableProperty<Pokemon?>(nil)
     let pokemonPagePokemon: PokemonPage.Pokemon
-    let pokemon = MutableProperty<Pokemon?>(nil)
 
     init(pokemonPagePokemon: PokemonPage.Pokemon, pokemonService: PokemonService = PokemonService()) {
         self.pokemonService = pokemonService
         self.pokemonPagePokemon = pokemonPagePokemon
-        pokemon <~ pokemonService.getPokemonByID(pokemonPagePokemon.id)
+        let pokemonSignal = pokemonService.getPokemonByID(pokemonPagePokemon.id)
+        pokemon <~ pokemonSignal
+        pokemonSignal.start()
     }
 
     var imageURL: SignalProducer<NSURL?, NoError> {
         return pokemon.producer.map { pokemon in
             guard let pokemon = pokemon else { return nil }
-            guard let string = pokemon.sprites.first?.front_default else { return nil }
+            let string = pokemon.sprites.front_default
             return NSURL(string: string)
         }
     }

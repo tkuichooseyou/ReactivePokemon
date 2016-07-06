@@ -5,7 +5,7 @@ struct Pokemon {
     let id: Int
     let name: String
     let types: [PokemonType]
-    let sprites: [PokemonSprite]
+    let sprites: PokemonSprites
 }
 
 extension Pokemon : Decodable {
@@ -14,7 +14,7 @@ extension Pokemon : Decodable {
             <^> j <| "id"
             <*> j <| "name"
             <*> j <|| "types"
-            <*> j <|| "sprites"
+            <*> j <| "sprites"
     }
 }
 
