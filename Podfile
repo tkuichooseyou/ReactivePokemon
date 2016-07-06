@@ -6,6 +6,7 @@ def general_pods
   pod 'Moya/ReactiveCocoa'
   pod 'Argo'
   pod 'Curry'
+  pod 'HanekeSwift'
 end
 
 target 'ReactivePokemon' do
