@@ -22,6 +22,7 @@ final class PokemonService {
 
     func getPokemonByID(id: String) -> SignalProducer<Pokemon?, NoError> {
         return provider.request(.Pokemon(id: id))
+            .retry(1)
             .map(Pokemon.decode)
             .map { $0.value }
             .flatMapError { error in
