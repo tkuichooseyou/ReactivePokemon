@@ -3,8 +3,8 @@ import Curry
 
 struct PokemonPage {
     let count: Int
-    let previous: String
-    let next: String
+    let previous: String?
+    let next: String?
     let results: [PokemonPage.Pokemon]
 }
 
@@ -12,8 +12,8 @@ extension PokemonPage : Decodable {
     static func decode(j: JSON) -> Decoded<PokemonPage> {
         return curry(PokemonPage.init)
             <^> j <| "count"
-            <*> j <| "previous"
-            <*> j <| "next"
+            <*> j <|? "previous"
+            <*> j <|? "next"
             <*> j <|| "results"
     }
 

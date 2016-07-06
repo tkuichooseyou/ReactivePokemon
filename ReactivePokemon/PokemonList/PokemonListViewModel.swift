@@ -9,7 +9,7 @@ class PokemonListViewModel: PokemonListViewModelType {
 
     init(pokemonService: PokemonService = PokemonService()) {
         self.pokemonService = pokemonService
-        let latestPokemonPageSignal = pokemonService.getPokemonPage(1)
+        let latestPokemonPageSignal = pokemonService.getPokemonPage(0)
         cellUpdaters <~ latestPokemonPage.signal
             .map(pokemonPageToCellUpdaters)
             .map { [unowned self] in

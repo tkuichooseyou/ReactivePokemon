@@ -14,8 +14,8 @@ final class PokemonService {
         return provider.request(.PokemonPage(page: page))
             .map(PokemonPage.decode)
             .map { $0.value }
-            .flatMapError { _ in
-                assertionFailure()
+            .flatMapError { error in
+                assertionFailure("Error: \(error)")
                 return SignalProducer<PokemonPage?, NoError>.empty
             }
     }
@@ -24,8 +24,8 @@ final class PokemonService {
         return provider.request(.Pokemon(id: id))
             .map(Pokemon.decode)
             .map { $0.value }
-            .flatMapError { _ in
-                assertionFailure()
+            .flatMapError { error in
+                assertionFailure("Error: \(error)")
                 return SignalProducer<Pokemon?, NoError>.empty
         }
     }
