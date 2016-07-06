@@ -10,19 +10,13 @@ final class PokemonService {
         self.provider = provider
     }
 
-    func getPokemonList() -> SignalProducer<[Pokemon], NoError> {
-        return provider.request(.PokemonList)
-            .map { (json: JSON) -> [Decoded<Pokemon>] in
-                switch json {
-                case .Array(let array):
-                    return array.map(Pokemon.decode)
-                default:
-                    return []
-                }
-            }.map { $0.flatMap { $0.value } }
+    func getPokemonPage(page: Int) -> SignalProducer<PokemonPage?, NoError> {
+        return provider.request(.PokemonPage(page: page))
+            .map(PokemonPage.decode)
+            .map { $0.value }
             .flatMapError { _ in
                 assertionFailure()
-                return SignalProducer<[Pokemon], NoError>.empty
+                return SignalProducer<PokemonPage?, NoError>.empty
             }
     }
 
@@ -35,4 +29,5 @@ final class PokemonService {
                 return SignalProducer<Pokemon?, NoError>.empty
         }
     }
+
 }

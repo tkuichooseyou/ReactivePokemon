@@ -1,19 +1,32 @@
 import UIKit
+import ReactiveCocoa
+import Result
 
 protocol PokemonCellViewModelType {
-    var imageURL: NSURL? { get }
+    var imageURL: SignalProducer<NSURL?, NoError> { get }
     var nameText: String { get }
 }
 
 struct PokemonCellViewModel : PokemonCellViewModelType {
-    let pokemon: Pokemon
+    let pokemonService: PokemonService
+    let pokemonPagePokemon: PokemonPage.Pokemon
+    let pokemon = MutableProperty<Pokemon?>(nil)
 
-    var imageURL: NSURL? {
-        guard let string = pokemon.sprites.first?.front_default else { return nil }
-        return NSURL(string: string)
+    init(pokemonPagePokemon: PokemonPage.Pokemon, pokemonService: PokemonService = PokemonService()) {
+        self.pokemonService = pokemonService
+        self.pokemonPagePokemon = pokemonPagePokemon
+        pokemon <~ pokemonService.getPokemonByID(pokemonPagePokemon.id)
+    }
+
+    var imageURL: SignalProducer<NSURL?, NoError> {
+        return pokemon.producer.map { pokemon in
+            guard let pokemon = pokemon else { return nil }
+            guard let string = pokemon.sprites.first?.front_default else { return nil }
+            return NSURL(string: string)
+        }
     }
 
     var nameText: String {
-        return pokemon.name
+        return pokemonPagePokemon.name
     }
 }

@@ -23,8 +23,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5NE-D6-Zuw" customClass="PokemonListCollectionView" customModule="ReactivePokemon" customModuleProvider="target">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5NE-D6-Zuw" customClass="PokemonListCollectionView" customModule="ReactivePokemon" customModuleProvider="target">
                                 <rect key="frame" x="20" y="66" width="560" height="534"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VnK-8h-lzz">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -36,8 +37,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="5NE-D6-Zuw" firstAttribute="top" secondItem="IlY-K1-A1n" secondAttribute="bottom" constant="8" id="OT6-oR-OP6"/>
                             <constraint firstItem="IlY-K1-A1n" firstAttribute="top" secondItem="JtU-Mc-GEz" secondAttribute="bottom" constant="8" id="Vai-d5-ook"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="5NE-D6-Zuw" secondAttribute="trailing" id="Xqm-cL-tMx"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="5NE-D6-Zuw" secondAttribute="leading" id="YRF-C4-K28"/>
                             <constraint firstAttribute="trailingMargin" secondItem="IlY-K1-A1n" secondAttribute="trailing" id="Zz2-AZ-2xg"/>
+                            <constraint firstItem="Sg6-RX-SXF" firstAttribute="top" secondItem="5NE-D6-Zuw" secondAttribute="bottom" id="cws-Tm-q28"/>
                             <constraint firstAttribute="leadingMargin" secondItem="IlY-K1-A1n" secondAttribute="leading" id="mxk-l9-ZtI"/>
                         </constraints>
                     </view>

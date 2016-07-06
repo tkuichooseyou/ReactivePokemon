@@ -5,8 +5,8 @@ import Nimble
 class PokemonServiceSpec: QuickSpec {
     override func spec() {
         describe("PokemonService") {
-            describe("getPokemonList") {
-                it("returns signal with array of all pokemon") {
+            describe("getPokemonPage") {
+                it("returns signal with pokemon page") {
 
                 }
             }

@@ -1,7 +1,9 @@
 import Moya
 
+private let pageLimit = 100
+
 enum PokeAPI {
-    case PokemonList
+    case PokemonPage(page: Int)
     case Pokemon(id: String)
     case Type(id: String)
 
@@ -15,7 +17,7 @@ extension PokeAPI : TargetType {
 
     var path: String {
         switch self {
-        case .PokemonList: return "/pokemon"
+        case .PokemonPage: return "/pokemon"
         case .Pokemon(let id): return "/pokemon/\(id)"
         case .Type(let id): return "/type/\(id)"
         }
@@ -23,19 +25,24 @@ extension PokeAPI : TargetType {
 
     var method: Moya.Method {
         switch self {
-        case .PokemonList, .Pokemon, .Type: return .GET
+        case .PokemonPage, .Pokemon, .Type: return .GET
         }
     }
 
     var parameters: [String: AnyObject]? {
         switch self {
-        case .PokemonList, .Pokemon, .Type: return nil
+        case .Pokemon, .Type: return nil
+        case .PokemonPage(let page):
+            return [
+                "limit": String(pageLimit),
+                "offset": String(pageLimit*page),
+            ]
         }
     }
 
     var sampleData: NSData {
         switch self {
-        case .PokemonList:
+        case .PokemonPage:
             return NSData()
         case .Pokemon:
             return NSData()
