@@ -3,7 +3,12 @@ import ReactiveCocoa
 import Result
 import Argo
 
-final class PokemonService {
+protocol PokemonServiceType {
+    func getPokemonPage(page: Int) -> SignalProducer<PokemonPage?, NoError>
+    func getPokemonByID(id: String) -> SignalProducer<Pokemon?, NoError>
+}
+
+final class PokemonService : PokemonServiceType {
     private let provider: ProviderType
 
     init(provider: ProviderType = Provider.sharedInstance) {

@@ -17,7 +17,7 @@ extension PokemonPage : Decodable {
             <*> j <|| "results"
     }
 
-    struct Pokemon : Decodable {
+    struct Pokemon : Decodable, Equatable {
         let url: String
         let name: String
 
@@ -29,7 +29,6 @@ extension PokemonPage : Decodable {
             return id
         }
 
-
         static func decode(j: JSON) -> Decoded<Pokemon> {
             return curry(Pokemon.init)
                 <^> j <| "url"
@@ -38,3 +37,16 @@ extension PokemonPage : Decodable {
     }
 }
 
+extension PokemonPage : Equatable {}
+
+func ==(lhs: PokemonPage, rhs: PokemonPage) -> Bool {
+    return (
+        lhs.count == rhs.count &&
+            lhs.previous == rhs.previous &&
+            lhs.next == rhs.next &&
+            lhs.results == rhs.results)
+}
+
+func ==(lhs: PokemonPage.Pokemon, rhs: PokemonPage.Pokemon) -> Bool {
+    return lhs.url == rhs.url && lhs.name == rhs.name
+}

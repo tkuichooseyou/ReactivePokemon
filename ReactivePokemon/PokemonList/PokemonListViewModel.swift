@@ -3,11 +3,11 @@ import ReactiveCocoa
 protocol PokemonListViewModelType : CollectionViewModel {}
 
 class PokemonListViewModel: PokemonListViewModelType {
-    private let pokemonService: PokemonService
+    private let pokemonService: PokemonServiceType
     private let latestPokemonPage = MutableProperty<PokemonPage?>(nil)
     let cellUpdaters = MutableProperty<[CellUpdaterType]>([])
 
-    init(pokemonService: PokemonService = PokemonService()) {
+    init(pokemonService: PokemonServiceType = PokemonService()) {
         self.pokemonService = pokemonService
         let latestPokemonPageSignal = pokemonService.getPokemonPage(0)
         cellUpdaters <~ latestPokemonPage.signal

@@ -10,7 +10,7 @@ protocol PokemonCellViewModelType {
 struct PokemonCellViewModel : PokemonCellViewModelType {
     private let pokemonService: PokemonService
     private let pokemon = MutableProperty<Pokemon?>(nil)
-    let pokemonPagePokemon: PokemonPage.Pokemon
+    private let pokemonPagePokemon: PokemonPage.Pokemon
 
     init(pokemonPagePokemon: PokemonPage.Pokemon, pokemonService: PokemonService = PokemonService()) {
         self.pokemonService = pokemonService
@@ -31,4 +31,10 @@ struct PokemonCellViewModel : PokemonCellViewModelType {
     var nameText: String {
         return pokemonPagePokemon.name
     }
+}
+
+extension PokemonCellViewModel : Equatable {}
+
+func ==(lhs: PokemonCellViewModel, rhs: PokemonCellViewModel) -> Bool {
+    return lhs.pokemonPagePokemon == rhs.pokemonPagePokemon
 }

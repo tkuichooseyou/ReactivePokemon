@@ -3,7 +3,6 @@ import UIKit
 
 protocol CellUpdaterType {
     var reuseIdentifier: String { get }
-    var cellClass: AnyClass { get }
 
     func updateCell(cell: UICollectionViewCell)
     func updateCell(cell: UITableViewCell)
@@ -12,7 +11,6 @@ protocol CellUpdaterType {
 struct CellUpdater<Cell where Cell: UpdatableView> : CellUpdaterType {
     let viewModel: Cell.ViewModel
     let reuseIdentifier = String(Cell)
-    let cellClass: AnyClass = Cell.self
 
     func updateCell(cell: UICollectionViewCell) {
         (cell as? Cell)?.update(viewModel: viewModel)
