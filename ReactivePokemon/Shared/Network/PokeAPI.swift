@@ -43,11 +43,19 @@ extension PokeAPI : TargetType {
     var sampleData: NSData {
         switch self {
         case .PokemonPage:
-            return NSData()
+            return PokeAPI.stubbedResponse("pokemonPage0")
         case .Pokemon:
-            return NSData()
+            return PokeAPI.stubbedResponse("pokemon1")
         case .Type:
-            return NSData()
+            return PokeAPI.stubbedResponse("type1")
         }
+    }
+
+    private static func stubbedResponse(filename: String, bundle: NSBundle? = nil) -> NSData! {
+        @objc class TestClass: NSObject { }
+
+        let bundle = bundle ?? NSBundle(forClass: TestClass.self)
+        guard let path = bundle.pathForResource(filename, ofType: "json") else {return nil}
+        return NSData(contentsOfFile: path)
     }
 }
