@@ -7,14 +7,18 @@ class PokemonListViewModelSpec: QuickSpec {
         describe("PokemonListViewModel") {
             describe("init") {
                 it("initializes cell updaters from pokemon page") {
-                    let pokemonPage = PokemonPageBuilder().build()
+                    let pokemonPagePokemon = PokemonPagePokemonBuilder().build()
+                    let pokemonPagePokemons = [pokemonPagePokemon, pokemonPagePokemon]
+                    let pokemonPage = PokemonPageBuilder()
+                        .withResults(pokemonPagePokemons)
+                        .build()
                     let mockPokemonService = MockPokemonService()
                     mockPokemonService.stubPokemonPage = pokemonPage
                     let viewModel = PokemonListViewModel(pokemonService: mockPokemonService)
 
                     let cellViewModel = (viewModel.cellUpdaters.value.first as? CellUpdater<PokemonCell>)?.viewModel as? PokemonCellViewModel
                     let expectedCellViewModel = PokemonCellViewModel(pokemonPagePokemon: pokemonPage.results.first!)
-                    expect(viewModel.cellUpdaters.value.count).to(equal(1))
+                    expect(viewModel.cellUpdaters.value.count).to(equal(pokemonPagePokemons.count))
                     expect(cellViewModel).to(equal(expectedCellViewModel))
                 }
             }
