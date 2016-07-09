@@ -12,9 +12,11 @@ extension PokemonCell : UpdatableView {
     func update(viewModel viewModel: ViewModel) {
         imageView.image = ImagesCatalog.pokeballImage
 
-        viewModel.imageURL.startWithNext { [weak imageView] in
-            guard let url = $0 else { return }
-            imageView?.hnk_setImageFromURL(url)
+        tag = viewModel.index
+        viewModel.imageURL.startWithNext { [weak self] in
+            guard let url = $0 where
+            self?.tag == viewModel.index else { return }
+            self?.imageView?.hnk_setImageFromURL(url)
         }
         nameLabel.text = viewModel.nameText
     }

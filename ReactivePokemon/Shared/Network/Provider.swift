@@ -14,7 +14,7 @@ struct Provider : ProviderType {
         return Provider.reactiveCocoaMoyaProvider.request(target)
             .map { response in
                 guard let j = try? NSJSONSerialization.JSONObjectWithData(response.data, options: []) else {
-                    assertionFailure("Bad JSON"); return JSON("Bad JSON")
+                    ErrorHandler.handleAssertionFailure("Bad JSON for request target: \(target)"); return JSON("Bad JSON")
                 }
                 return JSON(j)
         }

@@ -21,8 +21,8 @@ class PokemonListViewModel: PokemonListViewModelType {
 
     private func pokemonPageToCellUpdaters(pokemonPage: PokemonPage?) -> [CellUpdaterType] {
         guard let pokemonPage = pokemonPage else { return [] }
-        return pokemonPage.results.map { pokemon in
-            let vm = PokemonCellViewModel(pokemonPagePokemon: pokemon)
+        return pokemonPage.results.enumerate().map { index, pokemon in
+            let vm = PokemonCellViewModel(pokemonPagePokemon: pokemon, index: index)
             return CellUpdater<PokemonCell>(viewModel: vm)
         }
     }

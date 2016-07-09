@@ -23,7 +23,7 @@ extension PokemonPage : Decodable {
 
         var id: String {
             guard let id = url.componentsSeparatedByString("/").dropLast().last else {
-                assertionFailure()
+                ErrorHandler.handleAssertionFailure("Bad Pokemon url JSON: \(url)");
                 return ""
             }
             return id

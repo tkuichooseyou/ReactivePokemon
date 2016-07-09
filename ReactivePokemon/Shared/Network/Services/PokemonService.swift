@@ -20,7 +20,7 @@ final class PokemonService : PokemonServiceType {
             .map(PokemonPage.decode)
             .map { $0.value }
             .flatMapError { error in
-                assertionFailure("Error: \(error)")
+                ErrorHandler.handleError(error)
                 return SignalProducer<PokemonPage?, NoError>.empty
             }
     }
@@ -31,7 +31,7 @@ final class PokemonService : PokemonServiceType {
             .map(Pokemon.decode)
             .map { $0.value }
             .flatMapError { error in
-                assertionFailure("Error: \(error)")
+                ErrorHandler.handleError(error)
                 return SignalProducer<Pokemon?, NoError>.empty
         }
     }

@@ -11,7 +11,7 @@ final class MockProvider: ProviderType {
         return mockMoyaProvider.request(target)
             .map { response in
                 guard let j = try? NSJSONSerialization.JSONObjectWithData(response.data, options: []) else {
-                    assertionFailure("Bad JSON"); return JSON("Bad JSON")
+                    ErrorHandler.handleAssertionFailure("Bad JSON"); return JSON("Bad JSON")
                 }
                 return JSON(j)
         }

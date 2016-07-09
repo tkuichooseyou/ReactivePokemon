@@ -12,7 +12,7 @@ struct Type {
 
     var id: String {
         guard let result = url.characters.split("/").map(String.init).last else {
-            assertionFailure("Pokemon type ID missing")
+            ErrorHandler.handleAssertionFailure("Pokemon type ID missing for url: \(url)")
             return ""
         }
         return result
