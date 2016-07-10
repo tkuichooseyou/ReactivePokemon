@@ -35,3 +35,14 @@ extension Type : Decodable {
     }
 }
 
+extension PokemonType : Equatable {}
+
+func ==(lhs: PokemonType, rhs: PokemonType) -> Bool {
+    return lhs.slot == rhs.slot && lhs.type == rhs.type
+}
+
+extension Type : Equatable {}
+
+func ==(lhs: Type, rhs: Type) -> Bool {
+    return lhs.url == rhs.url && lhs.name == rhs.name
+}

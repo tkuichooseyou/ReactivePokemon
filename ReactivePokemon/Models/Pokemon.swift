@@ -18,3 +18,12 @@ extension Pokemon : Decodable {
     }
 }
 
+extension Pokemon : Equatable {}
+
+func ==(lhs: Pokemon, rhs: Pokemon) -> Bool {
+    return (
+        lhs.id == rhs.id &&
+            lhs.name == rhs.name &&
+            lhs.types == rhs.types &&
+            lhs.sprites == rhs.sprites)
+}

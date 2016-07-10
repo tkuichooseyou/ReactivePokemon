@@ -11,3 +11,9 @@ extension PokemonSprites : Decodable {
             <^> j <| "front_default"
     }
 }
+
+extension PokemonSprites : Equatable {}
+
+func ==(lhs: PokemonSprites, rhs: PokemonSprites) -> Bool {
+    return lhs.front_default == rhs.front_default
+}
