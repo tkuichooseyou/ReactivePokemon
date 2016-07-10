@@ -2,7 +2,7 @@ import UIKit
 import ReactiveCocoa
 
 final class PokemonListCollectionView: UICollectionView {
-    private let pokemonListViewModel: PokemonListViewModelType = PokemonListViewModel()
+    let pokemonListViewModel: PokemonListViewModelType = PokemonListViewModel()
     private var disposable: Disposable?
 
     required init?(coder aDecoder: NSCoder) {
@@ -23,8 +23,10 @@ final class PokemonListCollectionView: UICollectionView {
         delegate = self
         dataSource = self
         register(PokemonCell)
-        disposable = pokemonListViewModel.cellUpdaters.producer.startWithNext { [weak self] _ in
-            self?.reloadData()
+        disposable = pokemonListViewModel.cellUpdaters.producer
+            .observeOn(UIScheduler())
+            .startWithNext { [weak self] _ in
+                self?.reloadData()
         }
     }
 }
@@ -42,9 +44,10 @@ extension PokemonListCollectionView: UICollectionViewDataSource {
     }
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let width = collectionView.frame.width
+        let width = collectionView.frame.width - 20
+        print(width)
         let height = collectionView.frame.height
-        return CGSize(width: width, height: height/5)
+        return CGSize(width: width, height: height/8)
     }
 }
 

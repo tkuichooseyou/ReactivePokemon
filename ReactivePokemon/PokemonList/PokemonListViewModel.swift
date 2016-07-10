@@ -1,27 +1,43 @@
 import ReactiveCocoa
 
-protocol PokemonListViewModelType : CollectionViewModel {}
+protocol PokemonListViewModelType : CollectionViewModel {
+    var pokemonFilterName: MutableProperty<String> { get }
+}
 
 class PokemonListViewModel: PokemonListViewModelType {
     private let pokemonService: PokemonServiceType
-    private let latestPokemonPage = MutableProperty<PokemonPage?>(nil)
+    private let pokemonPages = MutableProperty<[PokemonPage]>([])
+    let pokemonFilterName = MutableProperty<String>("")
     let cellUpdaters = MutableProperty<[CellUpdaterType]>([])
 
     init(pokemonService: PokemonServiceType = PokemonService()) {
         self.pokemonService = pokemonService
         let latestPokemonPageSignal = pokemonService.getPokemonPage(0)
-        cellUpdaters <~ latestPokemonPage.signal
-            .map(pokemonPageToCellUpdaters)
-            .map { [unowned self] in
-                return self.cellUpdaters.value + $0
+        pokemonPages <~ latestPokemonPageSignal
+            .map { [unowned self] pokemonPage in
+                guard let pokemonPage = pokemonPage else { return self.pokemonPages.value }
+                return self.pokemonPages.value + [pokemonPage]
         }
-        latestPokemonPage <~ latestPokemonPageSignal
+
+        cellUpdaters <~ pokemonFilterName.producer
+            .map(filteredResults)
+            .map(pokemonPageResultsToCellUpdaters)
         latestPokemonPageSignal.start()
     }
 
-    private func pokemonPageToCellUpdaters(pokemonPage: PokemonPage?) -> [CellUpdaterType] {
-        guard let pokemonPage = pokemonPage else { return [] }
-        return pokemonPage.results.enumerate().map { index, pokemon in
+    private var pokemonPageResults: [PokemonPage.Pokemon] {
+        return pokemonPages.value.reduce([]) { memo, next in memo + next.results }
+    }
+
+    private func filteredResults(filterName: String) -> [PokemonPage.Pokemon] {
+        guard let name = filterName.nilIfEmpty() else { return pokemonPageResults }
+        return pokemonPageResults.filter { pokemon in
+            pokemon.name.localizedCaseInsensitiveContainsString(name)
+        }
+    }
+
+    private func pokemonPageResultsToCellUpdaters(pokemonPageResults: [PokemonPage.Pokemon]) -> [CellUpdaterType] {
+        return pokemonPageResults.enumerate().map { index, pokemon in
             let vm = PokemonCellViewModel(pokemonPagePokemon: pokemon, index: index)
             return CellUpdater<PokemonCell>(viewModel: vm)
         }
