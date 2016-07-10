@@ -7,6 +7,7 @@ def general_pods
   pod 'Argo'
   pod 'Curry'
   pod 'HanekeSwift'
+  pod 'AwesomeCache'
 end
 
 target 'ReactivePokemon' do

@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (3.4.1)
   - Argo (3.0.1)
+  - AwesomeCache (3.0.1)
   - Curry (2.3.1)
   - HanekeSwift (0.10.1)
   - Moya/Core (6.5.0):
@@ -17,6 +18,7 @@ PODS:
 
 DEPENDENCIES:
   - Argo
+  - AwesomeCache
   - Curry
   - HanekeSwift
   - Moya/ReactiveCocoa
@@ -26,6 +28,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
   Argo: 22c5d62b7967020a641468c91dc9488bea9523b8
+  AwesomeCache: a1561c926b6cf812c5f3f4262ea22e20bf8323c1
   Curry: c8f65c8ade091aad5cb86f7b51dd408d698810ca
   HanekeSwift: '08e47d3d0f2899ec58e5d257beba0de619aca9e8'
   Moya: f7a4044719381cc6299f9ad3e0ef05f426f0557b
@@ -34,6 +37,6 @@ SPEC CHECKSUMS:
   ReactiveCocoa: 5a42745f11ea236f405bb9ce5e97c5e3b23562dd
   Result: 6e722d4a66b1408680dbfcdf51c0b1c4b706316a
 
-PODFILE CHECKSUM: ba072a962623214d6018a67204572e5712fd2085
+PODFILE CHECKSUM: d67636406a3c7fa27788094cac6313b3d8b255c3
 
 COCOAPODS: 1.0.1
