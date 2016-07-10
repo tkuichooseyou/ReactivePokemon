@@ -45,7 +45,6 @@ extension PokemonListCollectionView: UICollectionViewDataSource {
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let width = collectionView.frame.width - 20
-        print(width)
         let height = collectionView.frame.height
         return CGSize(width: width, height: height/8)
     }

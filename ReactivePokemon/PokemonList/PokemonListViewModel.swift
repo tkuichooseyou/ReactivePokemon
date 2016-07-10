@@ -1,4 +1,5 @@
 import ReactiveCocoa
+import Result
 
 protocol PokemonListViewModelType : CollectionViewModel {
     var pokemonFilterName: MutableProperty<String> { get }
@@ -9,6 +10,7 @@ class PokemonListViewModel: PokemonListViewModelType {
     private let pokemonPages = MutableProperty<[PokemonPage]>([])
     let pokemonFilterName = MutableProperty<String>("")
     let cellUpdaters = MutableProperty<[CellUpdaterType]>([])
+    private var cellVMCache = [Int: PokemonCellViewModel]()
 
     init(pokemonService: PokemonServiceType = PokemonService()) {
         self.pokemonService = pokemonService
@@ -19,9 +21,16 @@ class PokemonListViewModel: PokemonListViewModelType {
                 return self.pokemonPages.value + [pokemonPage]
         }
 
-        cellUpdaters <~ pokemonFilterName.producer
+        let fullCellUpdaterSignal = pokemonPages.producer
+            .map {$0.reduce([]) { memo, next in memo + next.results}}
+            .map(pokemonPageResultsToCellUpdaters)
+
+        let filteredCellUpdaterSignal = pokemonFilterName.producer
             .map(filteredResults)
             .map(pokemonPageResultsToCellUpdaters)
+
+        let signal: SignalProducer<[CellUpdaterType], NoError> = SignalProducer(values:fullCellUpdaterSignal, filteredCellUpdaterSignal).flatten(.Merge)
+        cellUpdaters <~ signal
         latestPokemonPageSignal.start()
     }
 
@@ -38,8 +47,12 @@ class PokemonListViewModel: PokemonListViewModelType {
 
     private func pokemonPageResultsToCellUpdaters(pokemonPageResults: [PokemonPage.Pokemon]) -> [CellUpdaterType] {
         return pokemonPageResults.enumerate().map { index, pokemon in
-            let vm = PokemonCellViewModel(pokemonPagePokemon: pokemon, index: index)
-            return CellUpdater<PokemonCell>(viewModel: vm)
+            guard let cachedVM = cellVMCache[index] else {
+                let vm = PokemonCellViewModel(pokemonPagePokemon: pokemon, index: index)
+                cellVMCache[index] = vm
+                return CellUpdater<PokemonCell>(viewModel: vm)
+            }
+            return CellUpdater<PokemonCell>(viewModel: cachedVM)
         }
     }
 }

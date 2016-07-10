@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,10 +16,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pokeball" translatesAutoresizingMaskIntoConstraints="NO" id="StL-lX-I9P">
-                        <rect key="frame" x="8" y="8" width="68" height="61"/>
+                        <rect key="frame" x="8" y="8" width="61" height="61"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="StL-lX-I9P" secondAttribute="height" multiplier="1:1" id="Z4D-6I-uTc"/>
+                        </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bulbasaur - placeholder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6M2-O0-C3O">
-                        <rect key="frame" x="96" y="28" width="183" height="21"/>
+                        <rect key="frame" x="89" y="28" width="314" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -30,11 +34,17 @@
                 <constraint firstAttribute="trailing" secondItem="StL-lX-I9P" secondAttribute="trailing" constant="335" id="2jk-Zf-1Pc"/>
                 <constraint firstAttribute="bottom" secondItem="StL-lX-I9P" secondAttribute="bottom" constant="8" id="8bM-g3-mVH"/>
                 <constraint firstItem="StL-lX-I9P" firstAttribute="top" secondItem="7bi-Fc-8HD" secondAttribute="top" constant="8" id="jlC-rh-JMv"/>
+                <constraint firstAttribute="trailing" secondItem="6M2-O0-C3O" secondAttribute="trailing" constant="8" id="l24-Ry-ElC"/>
                 <constraint firstItem="StL-lX-I9P" firstAttribute="leading" secondItem="7bi-Fc-8HD" secondAttribute="leading" constant="8" id="nzN-b3-ZfQ"/>
                 <constraint firstItem="6M2-O0-C3O" firstAttribute="centerY" secondItem="StL-lX-I9P" secondAttribute="centerY" id="rDK-VB-hrt"/>
                 <constraint firstItem="6M2-O0-C3O" firstAttribute="leading" secondItem="StL-lX-I9P" secondAttribute="trailing" constant="20" id="wLd-kk-yjC"/>
             </constraints>
             <size key="customSize" width="411" height="77"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="2jk-Zf-1Pc"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="imageView" destination="StL-lX-I9P" id="HUN-uq-zvx"/>
                 <outlet property="nameLabel" destination="6M2-O0-C3O" id="58w-kH-9lf"/>
