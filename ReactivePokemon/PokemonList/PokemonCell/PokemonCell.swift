@@ -16,10 +16,10 @@ extension PokemonCell : UpdatableView {
     typealias ViewModel = PokemonCellViewModelType
 
     func update(viewModel viewModel: ViewModel) {
-        tag = viewModel.index
+        tag = viewModel.pokemonID
         nameLabel.text = viewModel.nameText
         viewModel.imageURL.startWithNext { [weak self] in
-            guard let url = $0 where self?.tag == viewModel.index else { return }
+            guard let url = $0 where self?.tag == viewModel.pokemonID else { return }
             self?.imageView?.hnk_setImageFromURL(url)
         }
     }

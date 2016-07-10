@@ -10,7 +10,7 @@ class PokemonListViewModel: PokemonListViewModelType {
     private let pokemonPages = MutableProperty<[PokemonPage]>([])
     let pokemonFilterName = MutableProperty<String>("")
     let cellUpdaters = MutableProperty<[CellUpdaterType]>([])
-    private var cellVMCache = [Int: PokemonCellViewModel]()
+    private var cellVMCache = [String: PokemonCellViewModel]()
 
     init(pokemonService: PokemonServiceType = PokemonService()) {
         self.pokemonService = pokemonService
@@ -46,10 +46,10 @@ class PokemonListViewModel: PokemonListViewModelType {
     }
 
     private func pokemonPageResultsToCellUpdaters(pokemonPageResults: [PokemonPage.Pokemon]) -> [CellUpdaterType] {
-        return pokemonPageResults.enumerate().map { index, pokemon in
-            guard let cachedVM = cellVMCache[index] else {
-                let vm = PokemonCellViewModel(pokemonPagePokemon: pokemon, index: index)
-                cellVMCache[index] = vm
+        return pokemonPageResults.map { pokemon in
+            guard let cachedVM = cellVMCache[pokemon.id] else {
+                let vm = PokemonCellViewModel(pokemonPagePokemon: pokemon)
+                cellVMCache[pokemon.id] = vm
                 return CellUpdater<PokemonCell>(viewModel: vm)
             }
             return CellUpdater<PokemonCell>(viewModel: cachedVM)

@@ -5,18 +5,17 @@ import Result
 protocol PokemonCellViewModelType {
     var imageURL: SignalProducer<NSURL?, NoError> { get }
     var nameText: String { get }
-    var index: Int { get }
+    var pokemonID: Int { get }
 }
 
 struct PokemonCellViewModel : PokemonCellViewModelType {
     private let pokemonService: PokemonService
     private let pokemon = MutableProperty<Pokemon?>(nil)
     private let pokemonPagePokemon: PokemonPage.Pokemon
-    let index: Int
+    var pokemonID: Int { return Int(pokemonPagePokemon.id)! }
 
-    init(pokemonPagePokemon: PokemonPage.Pokemon, index: Int, pokemonService: PokemonService = PokemonService()) {
+    init(pokemonPagePokemon: PokemonPage.Pokemon, pokemonService: PokemonService = PokemonService()) {
         self.pokemonService = pokemonService
-        self.index = index
         self.pokemonPagePokemon = pokemonPagePokemon
         let pokemonSignal = pokemonService.getPokemonByID(pokemonPagePokemon.id)
         pokemon <~ pokemonSignal

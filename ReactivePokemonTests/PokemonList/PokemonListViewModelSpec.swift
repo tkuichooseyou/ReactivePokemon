@@ -19,6 +19,7 @@ class PokemonListViewModelSpec: QuickSpec {
                         .build()
                     let pokemonPagePokemonTwo = PokemonPagePokemonBuilder()
                         .withName("ivysaur")
+                        .withURL("http://pokeapi.co/api/v2/pokemon/2/")
                         .build()
                     let pokemonPagePokemons = [pokemonPagePokemonOne, pokemonPagePokemonTwo]
                     let pokemonPage = PokemonPageBuilder()
@@ -33,8 +34,8 @@ class PokemonListViewModelSpec: QuickSpec {
                     it("returns all cell updaters on initialization with empty filter name") {
                         let cellViewModelOne = (viewModel.cellUpdaters.value.first as? CellUpdater<PokemonCell>)?.viewModel as? PokemonCellViewModel
                         let cellViewModelTwo = (viewModel.cellUpdaters.value.last as? CellUpdater<PokemonCell>)?.viewModel as? PokemonCellViewModel
-                        let expectedCellViewModelOne = PokemonCellViewModel(pokemonPagePokemon: pokemonPagePokemonOne, index: 0)
-                        let expectedCellViewModelTwo = PokemonCellViewModel(pokemonPagePokemon: pokemonPagePokemonTwo, index: 1)
+                        let expectedCellViewModelOne = PokemonCellViewModel(pokemonPagePokemon: pokemonPagePokemonOne)
+                        let expectedCellViewModelTwo = PokemonCellViewModel(pokemonPagePokemon: pokemonPagePokemonTwo)
 
                         expect(viewModel.cellUpdaters.value.count).to(equal(2))
                         expect(cellViewModelOne).to(equal(expectedCellViewModelOne))
@@ -45,8 +46,8 @@ class PokemonListViewModelSpec: QuickSpec {
                         viewModel.pokemonFilterName.swap("")
                         let cellViewModelOne = (viewModel.cellUpdaters.value.first as? CellUpdater<PokemonCell>)?.viewModel as? PokemonCellViewModel
                         let cellViewModelTwo = (viewModel.cellUpdaters.value.last as? CellUpdater<PokemonCell>)?.viewModel as? PokemonCellViewModel
-                        let expectedCellViewModelOne = PokemonCellViewModel(pokemonPagePokemon: pokemonPagePokemonOne, index: 0)
-                        let expectedCellViewModelTwo = PokemonCellViewModel(pokemonPagePokemon: pokemonPagePokemonTwo, index: 1)
+                        let expectedCellViewModelOne = PokemonCellViewModel(pokemonPagePokemon: pokemonPagePokemonOne)
+                        let expectedCellViewModelTwo = PokemonCellViewModel(pokemonPagePokemon: pokemonPagePokemonTwo)
 
                         expect(viewModel.cellUpdaters.value.count).to(equal(2))
                         expect(cellViewModelOne).to(equal(expectedCellViewModelOne))
@@ -57,7 +58,7 @@ class PokemonListViewModelSpec: QuickSpec {
                         viewModel.pokemonFilterName.swap(filterName)
 
                         let cellViewModel = (viewModel.cellUpdaters.value.first as? CellUpdater<PokemonCell>)?.viewModel as? PokemonCellViewModel
-                        let expectedCellViewModel = PokemonCellViewModel(pokemonPagePokemon: pokemonPagePokemonOne, index: 0)
+                        let expectedCellViewModel = PokemonCellViewModel(pokemonPagePokemon: pokemonPagePokemonOne)
                         
                         expect(viewModel.cellUpdaters.value.count).to(equal(1))
                         expect(cellViewModel).to(equal(expectedCellViewModel))
