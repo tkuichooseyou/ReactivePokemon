@@ -1,3 +1,13 @@
+# ReactivePokemon
+Pokedex app using ReactiveCocoa
+
+# Setup
+`gem install cocoapods`
+
+`pod install`
+
+`open ReactivePokemon.xcworkspace`
+
 # TODO
 
 * Cache json to AwesomeCache
