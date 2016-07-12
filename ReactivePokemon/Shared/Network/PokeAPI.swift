@@ -14,6 +14,7 @@ enum PokeAPI {
 
 extension PokeAPI : TargetType {
     var baseURL: NSURL { return NSURL(string: base)! }
+    var fullURLString: String { return base + path }
 
     var path: String {
         switch self {
