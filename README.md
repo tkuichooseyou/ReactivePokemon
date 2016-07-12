@@ -11,6 +11,7 @@ Pokedex app using ReactiveCocoa
 # TODO
 
 * Cache json to AwesomeCache
+* Cell prefetching: Nuke + Preheat
 * Show pokemon type on cell
 * Fetch more pages
 * Pokemon detail screen when tapping cell

@@ -1,6 +1,6 @@
 import Moya
 
-private let pageLimit = 100
+private let pageLimit = 151
 
 enum PokeAPI {
     case PokemonPage(page: Int)
