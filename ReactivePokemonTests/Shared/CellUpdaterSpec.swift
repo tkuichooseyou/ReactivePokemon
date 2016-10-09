@@ -24,7 +24,7 @@ class TestCell: UITableViewCell, UpdatableView {
     typealias ViewModel = TestCellViewModel
     var updateReceivedArg: TestCellViewModel?
 
-    func update(viewModel viewModel: ViewModel) {
+    func update(viewModel: ViewModel) {
         updateReceivedArg = viewModel
     }
 }

@@ -1,15 +1,15 @@
 import UIKit
 import Moya
 import Result
-import ReactiveCocoa
+import ReactiveSwift
 
 final class PokemonListViewController: UIViewController {
     @IBOutlet private weak var collectionView: PokemonListCollectionView!
     @IBOutlet private weak var searchTextField: UITextField! {
         didSet {
             collectionView.pokemonListViewModel.pokemonFilterName <~ searchTextField
-                .getTextSignalProducer()
-                .throttle(0.5, onScheduler: QueueScheduler())
+                .rac_textSignal
+                .throttle(0.5, on: QueueScheduler())
         }
     }
 }

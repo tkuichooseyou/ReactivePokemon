@@ -1,5 +1,5 @@
 import UIKit
-import ReactiveCocoa
+import ReactiveSwift
 
 final class PokemonListCollectionView: UICollectionView {
     let pokemonListViewModel: PokemonListViewModelType = PokemonListViewModel()
@@ -22,23 +22,23 @@ final class PokemonListCollectionView: UICollectionView {
     private func setup() {
         delegate = self
         dataSource = self
-        register(PokemonCell)
+        register(PokemonCell.self)
         disposable = pokemonListViewModel.cellUpdaters.producer
-            .observeOn(UIScheduler())
-            .startWithNext { [weak self] _ in
+            .observe(on: UIScheduler())
+            .startWithValues { [weak self] _ in
                 self?.reloadData()
         }
     }
 }
 
 extension PokemonListCollectionView: UICollectionViewDataSource {
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return pokemonListViewModel.numberOfItemsInSection(section)
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cellUpdater = pokemonListViewModel.cellUpdaters.value[indexPath.row]
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellUpdater.reuseIdentifier, forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellUpdater.reuseIdentifier, for: indexPath as IndexPath)
         cellUpdater.updateCell(cell)
         return cell
     }

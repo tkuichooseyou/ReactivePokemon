@@ -1,4 +1,4 @@
-import ReactiveCocoa
+import ReactiveSwift
 import Result
 
 protocol PokemonListViewModelType : CollectionViewModel {
@@ -29,7 +29,7 @@ class PokemonListViewModel: PokemonListViewModelType {
             .map(filteredResults)
             .map(pokemonPageResultsToCellUpdaters)
 
-        let signal: SignalProducer<[CellUpdaterType], NoError> = SignalProducer(values:fullCellUpdaterSignal, filteredCellUpdaterSignal).flatten(.Merge)
+        let signal: SignalProducer<[CellUpdaterType], NoError> = SignalProducer(values:fullCellUpdaterSignal, filteredCellUpdaterSignal).flatten(.merge)
         cellUpdaters <~ signal
         latestPokemonPageSignal.start()
     }
@@ -39,9 +39,9 @@ class PokemonListViewModel: PokemonListViewModelType {
     }
 
     private func filteredResults(filterName: String) -> [PokemonPage.Pokemon] {
-        guard let name = filterName.nilIfEmpty() else { return pokemonPageResults }
+        guard let name = filterName.nilIfEmpty()?.lowercased() else { return pokemonPageResults }
         return pokemonPageResults.filter { pokemon in
-            pokemon.name.localizedCaseInsensitiveContainsString(name)
+            pokemon.name.lowercased().contains(name)
         }
     }
 

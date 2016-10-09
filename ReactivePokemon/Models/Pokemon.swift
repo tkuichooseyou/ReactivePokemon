@@ -1,5 +1,6 @@
 import Argo
 import Curry
+import Runes
 
 struct Pokemon {
     let id: Int
@@ -9,7 +10,7 @@ struct Pokemon {
 }
 
 extension Pokemon : Decodable {
-    static func decode(j: JSON) -> Decoded<Pokemon> {
+    static func decode(_ j: JSON) -> Decoded<Pokemon> {
         return curry(Pokemon.init)
             <^> j <| "id"
             <*> j <| "name"

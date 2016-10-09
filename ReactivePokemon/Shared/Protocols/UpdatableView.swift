@@ -4,5 +4,5 @@ import UIKit
 protocol UpdatableView: class {
     associatedtype ViewModel
 
-    func update(viewModel viewModel: ViewModel)
+    func update(viewModel: ViewModel)
 }

@@ -4,19 +4,19 @@ import UIKit
 protocol CellUpdaterType {
     var reuseIdentifier: String { get }
 
-    func updateCell(cell: UICollectionViewCell)
-    func updateCell(cell: UITableViewCell)
+    func updateCell(_ cell: UICollectionViewCell)
+    func updateCell(_ cell: UITableViewCell)
 }
 
-struct CellUpdater<Cell where Cell: UpdatableView> : CellUpdaterType {
+struct CellUpdater<Cell> : CellUpdaterType where Cell: UpdatableView {
     let viewModel: Cell.ViewModel
-    let reuseIdentifier = String(Cell)
+    let reuseIdentifier = String(describing: Cell.self)
 
-    func updateCell(cell: UICollectionViewCell) {
+    func updateCell(_ cell: UICollectionViewCell) {
         (cell as? Cell)?.update(viewModel: viewModel)
     }
 
-    func updateCell(cell: UITableViewCell) {
+    func updateCell(_ cell: UITableViewCell) {
         (cell as? Cell)?.update(viewModel: viewModel)
     }
 }

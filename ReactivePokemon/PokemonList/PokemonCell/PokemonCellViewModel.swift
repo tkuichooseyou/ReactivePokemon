@@ -1,9 +1,9 @@
 import UIKit
-import ReactiveCocoa
+import ReactiveSwift
 import Result
 
 protocol PokemonCellViewModelType {
-    var imageURL: SignalProducer<NSURL?, NoError> { get }
+    var imageURL: SignalProducer<URL?, NoError> { get }
     var nameText: String { get }
     var pokemonID: Int { get }
 }
@@ -11,7 +11,7 @@ protocol PokemonCellViewModelType {
 struct PokemonCellViewModel : PokemonCellViewModelType {
     private let pokemonService: PokemonService
     private let pokemon = MutableProperty<Pokemon?>(nil)
-    private let pokemonPagePokemon: PokemonPage.Pokemon
+    fileprivate let pokemonPagePokemon: PokemonPage.Pokemon
     var pokemonID: Int { return Int(pokemonPagePokemon.id)! }
 
     init(pokemonPagePokemon: PokemonPage.Pokemon, pokemonService: PokemonService = PokemonService()) {
@@ -22,11 +22,11 @@ struct PokemonCellViewModel : PokemonCellViewModelType {
         pokemonSignal.start()
     }
 
-    var imageURL: SignalProducer<NSURL?, NoError> {
+    var imageURL: SignalProducer<URL?, NoError> {
         return pokemon.producer.map { pokemon in
             guard let pokemon = pokemon else { return nil }
             let string = pokemon.sprites.front_default
-            return NSURL(string: string)
+            return URL(string: string)
         }
     }
 

@@ -1,27 +1,27 @@
 import Foundation
 import Moya
-import ReactiveCocoa
+import ReactiveSwift
 
 private protocol ErrorHandlerType {
-    func handleError(error: ErrorType)
-    func handleError(moyaError: Moya.Error, target: TargetType)
-    func handleAssertionFailure(message: String)
-    func log(message: String)
+    func handleError(_ error: Swift.Error)
+    func handleError(_ moyaError: Moya.Error, target: TargetType)
+    func handleAssertionFailure(_ message: String)
+    func log(_ message: String)
 }
 
 extension ErrorHandlerType {
-    func handleError(moyaError: Moya.Error, target: TargetType) {
+    func handleError(_ moyaError: Moya.Error, target: TargetType) {
         switch moyaError {
-        case let .ImageMapping(response): log("Image mapping error: \(response.description)")
-        case let .JSONMapping(response): log(response.description)
-        case let .StringMapping(response): log(response.description)
-        case .StatusCode(let response):
+        case let .imageMapping(response): log("Image mapping error: \(response.description)")
+        case let .jsonMapping(response): log(response.description)
+        case let .stringMapping(response): log(response.description)
+        case .statusCode(let response):
             switch response.statusCode {
             case 408: log("Timeout: \(response.description)")
             default: log(response.description)
             }
-        case let .Data(response): log(response.description)
-        case let .Underlying(error):
+        case let .data(response): log(response.description)
+        case let .underlying(error):
             let error = error as NSError
             switch error.code {
             case NSURLErrorTimedOut, NSURLErrorNotConnectedToInternet: log("Timeout")
@@ -33,39 +33,39 @@ extension ErrorHandlerType {
 
 
 class ErrorHandler {
-    private static var sharedInstance: ErrorHandlerType = (DebugDetector.debuggerAttached() ? DebugErrorHandler() : ReleaseErrorHandler())
+    fileprivate static var sharedInstance: ErrorHandlerType = (DebugDetector.debuggerAttached() ? DebugErrorHandler() : ReleaseErrorHandler())
 
-    static func handleError(error: ErrorType) {
+    static func handleError(_ error: Swift.Error) {
         sharedInstance.handleError(error)
     }
 
-    static func handleError(moyaError: Moya.Error, target: TargetType) {
+    static func handleError(_ moyaError: Moya.Error, target: TargetType) {
         sharedInstance.handleError(moyaError, target: target)
     }
 
-    static func handleAssertionFailure(message: String) {
+    static func handleAssertionFailure(_ message: String) {
         sharedInstance.handleAssertionFailure(message)
     }
 }
 
 private class ReleaseErrorHandler : ErrorHandlerType {
-    func handleError(error: ErrorType) {
+    func handleError(_ error: Swift.Error) {
         let error = error as NSError
         log(error.description)
     }
 
-    func handleAssertionFailure(message: String) {
+    func handleAssertionFailure(_ message: String) {
         log(message)
     }
 
-    func log(message: String) {
+    func log(_ message: String) {
         // log
     }
 }
 
 private class DebugErrorHandler : ErrorHandlerType {
-    private var debugAssertionFailure = false
-    func handleError(error: ErrorType) {
+    fileprivate var debugAssertionFailure = false
+    func handleError(_ error: Swift.Error) {
         switch error {
         default:
             let message = "Error: \(error)"
@@ -73,18 +73,19 @@ private class DebugErrorHandler : ErrorHandlerType {
         }
     }
 
-    func handleAssertionFailure(message: String) {
+    func handleAssertionFailure(_ message: String) {
         showAlert(message)
     }
 
-    func log(message: String) {
+    func log(_ message: String) {
         showAlert(message)
     }
 
-    private func showAlert(message: String) {
+    fileprivate func showAlert(_ message: String) {
         if debugAssertionFailure { assertionFailure(message) }
-        guard let rootVC = (UIApplication.sharedApplication().delegate as! AppDelegate).rootViewController else { ErrorHandler.handleAssertionFailure("Missing RootViewController"); return }
-        UIAlertController.Alert(message.substringToIndex(message.startIndex.advancedBy(500)))
+        guard let rootVC = (UIApplication.shared.delegate as! AppDelegate).rootViewController else { ErrorHandler.handleAssertionFailure("Missing RootViewController"); return }
+        let substring = message.substring(to: message.index(message.startIndex, offsetBy: 500))
+        UIAlertController.Alert(substring)
             .withOKAction(title: "Debug", handler: {_ in
                 self.debugAssertionFailure = true
             })

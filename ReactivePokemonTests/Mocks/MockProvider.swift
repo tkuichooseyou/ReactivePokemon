@@ -7,7 +7,7 @@ import Argo
 final class MockProvider: ProviderType {
     private let mockMoyaProvider = ReactiveCocoaMoyaProvider<PokeAPI>(stubClosure: MoyaProvider.ImmediatelyStub)
 
-    func request(target: PokeAPI) -> SignalProducer<JSON, Error> {
+    func request(_ target: PokeAPI) -> SignalProducer<JSON, Error> {
         return mockMoyaProvider.request(target)
             .map { response in
                 guard let j = try? NSJSONSerialization.JSONObjectWithData(response.data, options: []) else {

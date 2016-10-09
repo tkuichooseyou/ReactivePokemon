@@ -3,9 +3,9 @@ import Moya
 private let pageLimit = 100
 
 enum PokeAPI {
-    case PokemonPage(page: Int)
-    case Pokemon(id: String)
-    case Type(id: String)
+    case pokemonPage(page: Int)
+    case pokemon(id: String)
+    case type(id: String)
 
     var base: String {
         return "http://pokeapi.co/api/v2"
@@ -13,49 +13,57 @@ enum PokeAPI {
 }
 
 extension PokeAPI : TargetType {
-    var baseURL: NSURL { return NSURL(string: base)! }
+    var baseURL: URL { return URL(string: base)! }
 
     var path: String {
         switch self {
-        case .PokemonPage: return "/pokemon"
-        case .Pokemon(let id): return "/pokemon/\(id)"
-        case .Type(let id): return "/type/\(id)"
+        case .pokemonPage: return "/pokemon"
+        case .pokemon(let id): return "/pokemon/\(id)"
+        case .type(let id): return "/type/\(id)"
         }
     }
 
+    var task: Task {
+        switch self {
+        case .pokemonPage: return .request
+        case .pokemon: return .request
+        case .type: return .request
+        }
+    }
+    
     var method: Moya.Method {
         switch self {
-        case .PokemonPage, .Pokemon, .Type: return .GET
+        case .pokemonPage, .pokemon, .type: return .GET
         }
     }
 
-    var parameters: [String: AnyObject]? {
+    var parameters: [String: Any]? {
         switch self {
-        case .Pokemon, .Type: return nil
-        case .PokemonPage(let page):
+        case .pokemon, .type: return nil
+        case .pokemonPage(let page):
             return [
-                "limit": String(pageLimit),
-                "offset": String(pageLimit*page),
+                "limit": String(pageLimit) as AnyObject,
+                "offset": String(pageLimit*page) as AnyObject,
             ]
         }
     }
 
-    var sampleData: NSData {
+    var sampleData: Data {
         switch self {
-        case .PokemonPage:
+        case .pokemonPage:
             return PokeAPI.stubbedResponse("pokemonPage0")
-        case .Pokemon:
+        case .pokemon:
             return PokeAPI.stubbedResponse("pokemon1")
-        case .Type:
+        case .type:
             return PokeAPI.stubbedResponse("type1")
         }
     }
 
-    private static func stubbedResponse(filename: String, bundle: NSBundle? = nil) -> NSData! {
-        @objc class TestClass: NSObject { }
+    private static func stubbedResponse(_ filename: String, bundle: Bundle? = nil) -> Data! {
+        class TestClass: NSObject { }
 
-        let bundle = bundle ?? NSBundle(forClass: TestClass.self)
-        guard let path = bundle.pathForResource(filename, ofType: "json") else {return nil}
-        return NSData(contentsOfFile: path)
+        let bundle = bundle ?? Bundle(for: TestClass.self)
+        guard let path = bundle.url(forResource: filename, withExtension: "json") else {return nil}
+        return try! Data(contentsOf: path)
     }
 }

@@ -2,8 +2,8 @@ import UIKit
 import Haneke
 
 final class PokemonCell: UICollectionViewCell {
-    @IBOutlet private weak var imageView: UIImageView!
-    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet fileprivate weak var imageView: UIImageView!
+    @IBOutlet fileprivate weak var nameLabel: UILabel!
 
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -15,11 +15,11 @@ final class PokemonCell: UICollectionViewCell {
 extension PokemonCell : UpdatableView {
     typealias ViewModel = PokemonCellViewModelType
 
-    func update(viewModel viewModel: ViewModel) {
+    func update(viewModel: ViewModel) {
         tag = viewModel.pokemonID
         nameLabel.text = viewModel.nameText
-        viewModel.imageURL.startWithNext { [weak self] in
-            guard let url = $0 where self?.tag == viewModel.pokemonID else { return }
+        viewModel.imageURL.startWithValues { [weak self] in
+            guard let url = $0 , self?.tag == viewModel.pokemonID else { return }
             self?.imageView?.hnk_setImageFromURL(url)
         }
     }

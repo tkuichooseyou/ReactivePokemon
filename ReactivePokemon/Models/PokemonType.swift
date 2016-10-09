@@ -1,5 +1,6 @@
 import Argo
 import Curry
+import Runes
 
 struct PokemonType {
     let slot: Int
@@ -11,7 +12,7 @@ struct Type {
     let name: String
 
     var id: String {
-        guard let result = url.characters.split("/").map(String.init).last else {
+        guard let result = url.characters.split(separator: "/").map(String.init).last else {
             ErrorHandler.handleAssertionFailure("Pokemon type ID missing for url: \(url)")
             return ""
         }
@@ -20,7 +21,7 @@ struct Type {
 }
 
 extension PokemonType : Decodable {
-    static func decode(j: JSON) -> Decoded<PokemonType> {
+    static func decode(_ j: JSON) -> Decoded<PokemonType> {
         return curry(PokemonType.init)
             <^> j <| "slot"
             <*> j <| "type"
@@ -28,7 +29,7 @@ extension PokemonType : Decodable {
 }
 
 extension Type : Decodable {
-    static func decode(j: JSON) -> Decoded<Type> {
+    static func decode(_ j: JSON) -> Decoded<Type> {
         return curry(Type.init)
             <^> j <| "url"
             <*> j <| "name"

@@ -1,5 +1,6 @@
 import Argo
 import Curry
+import Runes
 
 struct PokemonPage {
     let count: Int
@@ -9,7 +10,7 @@ struct PokemonPage {
 }
 
 extension PokemonPage : Decodable {
-    static func decode(j: JSON) -> Decoded<PokemonPage> {
+    static func decode(_ j: JSON) -> Decoded<PokemonPage> {
         return curry(PokemonPage.init)
             <^> j <| "count"
             <*> j <|? "previous"
@@ -22,14 +23,14 @@ extension PokemonPage : Decodable {
         let name: String
 
         var id: String {
-            guard let id = url.componentsSeparatedByString("/").dropLast().last else {
+            guard let id = url.components(separatedBy: "/").dropLast().last else {
                 ErrorHandler.handleAssertionFailure("Bad Pokemon url JSON: \(url)");
                 return ""
             }
             return id
         }
 
-        static func decode(j: JSON) -> Decoded<Pokemon> {
+        static func decode(_ j: JSON) -> Decoded<Pokemon> {
             return curry(Pokemon.init)
                 <^> j <| "url"
                 <*> j <| "name"
