@@ -1,4 +1,4 @@
-import ReactiveCocoa
+import ReactiveSwift
 import Result
 
 @testable import ReactivePokemon

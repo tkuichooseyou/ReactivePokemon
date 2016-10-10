@@ -2,7 +2,7 @@ import UIKit
 import ReactiveSwift
 
 final class PokemonListCollectionView: UICollectionView {
-    let pokemonListViewModel: PokemonListViewModelType = PokemonListViewModel()
+    let pokemonListViewModel = PokemonListViewModel()
     private var disposable: Disposable?
 
     required init?(coder aDecoder: NSCoder) {

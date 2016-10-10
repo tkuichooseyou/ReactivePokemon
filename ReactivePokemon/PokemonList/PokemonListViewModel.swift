@@ -7,35 +7,54 @@ protocol PokemonListViewModelType : CollectionViewModel {
 
 class PokemonListViewModel: PokemonListViewModelType {
     private let pokemonService: PokemonServiceType
-    private let pokemonPages = MutableProperty<[PokemonPage]>([])
+    private let pokemonPage = MutableProperty<PokemonPage?>(nil)
     let pokemonFilterName = MutableProperty<String>("")
-    let cellUpdaters = MutableProperty<[CellUpdaterType]>([])
-    private var cellVMCache = [String: PokemonCellViewModel]()
+    let cellUpdaters = MutableProperty<[CellUpdater<PokemonCell>]>([])
+    private var cellVMCache = NSCache<NSString, PokemonCellViewModel>()
 
     init(pokemonService: PokemonServiceType = PokemonService()) {
         self.pokemonService = pokemonService
         let latestPokemonPageSignal = pokemonService.getPokemonPage(0)
-        pokemonPages <~ latestPokemonPageSignal
-            .map { [unowned self] pokemonPage in
-                guard let pokemonPage = pokemonPage else { return self.pokemonPages.value }
-                return self.pokemonPages.value + [pokemonPage]
-        }
+        pokemonPage <~ latestPokemonPageSignal
 
-        let fullCellUpdaterSignal = pokemonPages.producer
-            .map {$0.reduce([]) { memo, next in memo + next.results}}
+        let fullCellUpdaterSignal = pokemonPage.producer
+            .map {$0?.results ?? []}
             .map(pokemonPageResultsToCellUpdaters)
+            .on(value: { cellUpdaters in
+                DispatchQueue.global(qos: .userInitiated).async {
+                    let strideBy = 10
+                    let groupCount = cellUpdaters.count / strideBy
+                    let remainderIndices = (groupCount * strideBy)..<cellUpdaters.count
+
+                    DispatchQueue.concurrentPerform(iterations: groupCount) { strideIndex in
+                        let startIndex = strideIndex*strideBy
+                        (startIndex..<startIndex+strideBy).forEach { index in
+                            let cellUpdater = cellUpdaters[index]
+                            cellUpdater.viewModel.start()
+                        }
+
+                    }
+
+                    remainderIndices.forEach { index in
+                        let cellUpdater = cellUpdaters[index]
+                        cellUpdater.viewModel.start()
+                    }
+                }
+            })
 
         let filteredCellUpdaterSignal = pokemonFilterName.producer
             .map(filteredResults)
             .map(pokemonPageResultsToCellUpdaters)
 
-        let signal: SignalProducer<[CellUpdaterType], NoError> = SignalProducer(values:fullCellUpdaterSignal, filteredCellUpdaterSignal).flatten(.merge)
+        let signal: SignalProducer<[CellUpdater<PokemonCell>], NoError> = SignalProducer(values:fullCellUpdaterSignal, filteredCellUpdaterSignal).flatten(.merge)
+
+
         cellUpdaters <~ signal
         latestPokemonPageSignal.start()
     }
 
     private var pokemonPageResults: [PokemonPage.Pokemon] {
-        return pokemonPages.value.reduce([]) { memo, next in memo + next.results }
+        return pokemonPage.value?.results ?? []
     }
 
     private func filteredResults(filterName: String) -> [PokemonPage.Pokemon] {
@@ -45,11 +64,12 @@ class PokemonListViewModel: PokemonListViewModelType {
         }
     }
 
-    private func pokemonPageResultsToCellUpdaters(pokemonPageResults: [PokemonPage.Pokemon]) -> [CellUpdaterType] {
+    private func pokemonPageResultsToCellUpdaters(pokemonPageResults: [PokemonPage.Pokemon]) -> [CellUpdater<PokemonCell>] {
         return pokemonPageResults.map { pokemon in
-            guard let cachedVM = cellVMCache[pokemon.id] else {
+            let id = NSString(string: pokemon.id)
+            guard let cachedVM = cellVMCache.object(forKey: id) else {
                 let vm = PokemonCellViewModel(pokemonPagePokemon: pokemon)
-                cellVMCache[pokemon.id] = vm
+                cellVMCache.setObject(vm, forKey: id)
                 return CellUpdater<PokemonCell>(viewModel: vm)
             }
             return CellUpdater<PokemonCell>(viewModel: cachedVM)

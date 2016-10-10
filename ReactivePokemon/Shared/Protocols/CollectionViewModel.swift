@@ -1,7 +1,8 @@
 import ReactiveSwift
 
 protocol CollectionViewModel {
-    var cellUpdaters: MutableProperty<[CellUpdaterType]> { get }
+    associatedtype Cell : UpdatableView
+    var cellUpdaters: MutableProperty<[CellUpdater<Cell>]> { get }
     func numberOfItemsInSection(_ section: Int) -> Int
 }
 

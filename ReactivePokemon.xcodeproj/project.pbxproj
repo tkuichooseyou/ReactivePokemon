@@ -291,9 +291,9 @@
 			isa = PBXGroup;
 			children = (
 				8EDA55F61D31AD98002F0EE8 /* RAC+Ext.swift */,
+				8EDA55F81D31B7B9002F0EE8 /* String+Ext.swift */,
 				8EDA55F01D317E4C002F0EE8 /* UIAlertController+Ext.swift */,
 				8E73145D1D2B159A00E0B97E /* UICollectionView+Ext.swift */,
-				8EDA55F81D31B7B9002F0EE8 /* String+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";

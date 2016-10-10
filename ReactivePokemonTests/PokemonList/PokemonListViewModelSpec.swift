@@ -32,8 +32,8 @@ class PokemonListViewModelSpec: QuickSpec {
                     }
 
                     it("returns all cell updaters on initialization with empty filter name") {
-                        let cellViewModelOne = (viewModel.cellUpdaters.value.first as? CellUpdater<PokemonCell>)?.viewModel as? PokemonCellViewModel
-                        let cellViewModelTwo = (viewModel.cellUpdaters.value.last as? CellUpdater<PokemonCell>)?.viewModel as? PokemonCellViewModel
+                        let cellViewModelOne = viewModel.cellUpdaters.value.first?.viewModel as? PokemonCellViewModel
+                        let cellViewModelTwo = viewModel.cellUpdaters.value.last?.viewModel as? PokemonCellViewModel
                         let expectedCellViewModelOne = PokemonCellViewModel(pokemonPagePokemon: pokemonPagePokemonOne)
                         let expectedCellViewModelTwo = PokemonCellViewModel(pokemonPagePokemon: pokemonPagePokemonTwo)
 
@@ -44,8 +44,8 @@ class PokemonListViewModelSpec: QuickSpec {
 
                     it("returns all cell updaters if filter name is empty") {
                         viewModel.pokemonFilterName.swap("")
-                        let cellViewModelOne = (viewModel.cellUpdaters.value.first as? CellUpdater<PokemonCell>)?.viewModel as? PokemonCellViewModel
-                        let cellViewModelTwo = (viewModel.cellUpdaters.value.last as? CellUpdater<PokemonCell>)?.viewModel as? PokemonCellViewModel
+                        let cellViewModelOne = viewModel.cellUpdaters.value.first?.viewModel as? PokemonCellViewModel
+                        let cellViewModelTwo = viewModel.cellUpdaters.value.last?.viewModel as? PokemonCellViewModel
                         let expectedCellViewModelOne = PokemonCellViewModel(pokemonPagePokemon: pokemonPagePokemonOne)
                         let expectedCellViewModelTwo = PokemonCellViewModel(pokemonPagePokemon: pokemonPagePokemonTwo)
 
@@ -57,7 +57,7 @@ class PokemonListViewModelSpec: QuickSpec {
                     it("returns cell updaters matching filter name") {
                         viewModel.pokemonFilterName.swap(filterName)
 
-                        let cellViewModel = (viewModel.cellUpdaters.value.first as? CellUpdater<PokemonCell>)?.viewModel as? PokemonCellViewModel
+                        let cellViewModel = viewModel.cellUpdaters.value.first?.viewModel as? PokemonCellViewModel
                         let expectedCellViewModel = PokemonCellViewModel(pokemonPagePokemon: pokemonPagePokemonOne)
                         
                         expect(viewModel.cellUpdaters.value.count).to(equal(1))

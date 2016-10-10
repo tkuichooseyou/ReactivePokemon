@@ -6,9 +6,10 @@ protocol PokemonCellViewModelType {
     var imageURL: SignalProducer<URL?, NoError> { get }
     var nameText: String { get }
     var pokemonID: Int { get }
+    func start()
 }
 
-struct PokemonCellViewModel : PokemonCellViewModelType {
+final class PokemonCellViewModel : PokemonCellViewModelType {
     private let pokemonService: PokemonService
     private let pokemon = MutableProperty<Pokemon?>(nil)
     fileprivate let pokemonPagePokemon: PokemonPage.Pokemon
@@ -17,9 +18,6 @@ struct PokemonCellViewModel : PokemonCellViewModelType {
     init(pokemonPagePokemon: PokemonPage.Pokemon, pokemonService: PokemonService = PokemonService()) {
         self.pokemonService = pokemonService
         self.pokemonPagePokemon = pokemonPagePokemon
-        let pokemonSignal = pokemonService.getPokemonByID(pokemonPagePokemon.id)
-        pokemon <~ pokemonSignal
-        pokemonSignal.start()
     }
 
     var imageURL: SignalProducer<URL?, NoError> {
@@ -32,6 +30,12 @@ struct PokemonCellViewModel : PokemonCellViewModelType {
 
     var nameText: String {
         return pokemonPagePokemon.name
+    }
+
+    func start() {
+        let pokemonSignal = pokemonService.getPokemonByID(pokemonPagePokemon.id)
+        pokemon <~ pokemonSignal
+        pokemonSignal.start()
     }
 }
 

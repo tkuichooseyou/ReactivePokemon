@@ -1,5 +1,5 @@
 import Moya
-import ReactiveCocoa
+import ReactiveSwift
 import Argo
 
 @testable import ReactivePokemon
@@ -7,10 +7,10 @@ import Argo
 final class MockProvider: ProviderType {
     private let mockMoyaProvider = ReactiveCocoaMoyaProvider<PokeAPI>(stubClosure: MoyaProvider.ImmediatelyStub)
 
-    func request(_ target: PokeAPI) -> SignalProducer<JSON, Error> {
-        return mockMoyaProvider.request(target)
+    func request(_ target: PokeAPI) -> SignalProducer<JSON, Moya.Error> {
+        return mockMoyaProvider.request(token: target)
             .map { response in
-                guard let j = try? NSJSONSerialization.JSONObjectWithData(response.data, options: []) else {
+                guard let j = try? JSONSerialization.jsonObject(with: response.data, options: []) else {
                     ErrorHandler.handleAssertionFailure("Bad JSON"); return JSON("Bad JSON")
                 }
                 return JSON(j)

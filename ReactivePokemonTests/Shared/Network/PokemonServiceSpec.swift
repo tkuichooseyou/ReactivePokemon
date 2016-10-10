@@ -10,7 +10,7 @@ class PokemonServiceSpec: QuickSpec {
                     let pokemonService = PokemonService(provider: MockProvider())
                     var enteredClosure = false
 
-                    pokemonService.getPokemonPage(0).startWithNext { pokemonPage in
+                    pokemonService.getPokemonPage(0).startWithValues { pokemonPage in
                         enteredClosure = true
                         expect(pokemonPage?.count).to(equal(811))
                         expect(pokemonPage?.previous).to(beNil())
