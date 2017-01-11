@@ -3,9 +3,10 @@ use_frameworks!
 inhibit_all_warnings!
 
 def general_pods
-  pod 'Moya', '8.0.0-beta.2'
+  pod 'Moya'
   pod 'Moya/ReactiveCocoa'
-  pod 'ReactiveSwift', '1.0.0-alpha.2'
+  pod 'ReactiveSwift'
+  pod 'ReactiveCocoa', '~> 5.0.0-rc.1'
   pod 'Argo', :git => 'https://github.com/thoughtbot/Argo.git'
   pod 'Curry', :git => 'https://github.com/thoughtbot/Curry.git'
   pod 'Runes', :git => 'https://github.com/thoughtbot/Runes.git'

@@ -5,7 +5,7 @@ import Argo
 @testable import ReactivePokemon
 
 final class MockProvider: ProviderType {
-    private let mockMoyaProvider = ReactiveCocoaMoyaProvider<PokeAPI>(stubClosure: MoyaProvider.ImmediatelyStub)
+    private let mockMoyaProvider = ReactiveSwiftMoyaProvider<PokeAPI>(stubClosure: MoyaProvider.ImmediatelyStub)
 
     func request(_ target: PokeAPI) -> SignalProducer<JSON, Moya.Error> {
         return mockMoyaProvider.request(token: target)

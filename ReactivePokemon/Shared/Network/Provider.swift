@@ -8,11 +8,11 @@ protocol ProviderType {
 
 struct Provider : ProviderType {
     static let sharedInstance = Provider()
-    private static var reactiveCocoaMoyaProvider: ReactiveCocoaMoyaProvider<PokeAPI> = ReactiveCocoaMoyaProvider()
+    private static var reactiveSwiftMoyaProvider: ReactiveSwiftMoyaProvider<PokeAPI> = ReactiveSwiftMoyaProvider()
 
     func request(_ target: PokeAPI) -> SignalProducer<JSON, Moya.Error> {
-        return Provider.reactiveCocoaMoyaProvider
-            .request(token: target)
+        return Provider.reactiveSwiftMoyaProvider
+            .request(target)
             .map { response in
                 guard let j = try? JSONSerialization.jsonObject(with: response.data, options: []) else {
                     ErrorHandler.handleAssertionFailure("Bad JSON for request target: \(target)"); return JSON("Bad JSON")

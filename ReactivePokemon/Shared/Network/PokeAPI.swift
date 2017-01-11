@@ -33,7 +33,7 @@ extension PokeAPI : TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .pokemonPage, .pokemon, .type: return .GET
+        case .pokemonPage, .pokemon, .type: return .get
         }
     }
 
@@ -46,6 +46,10 @@ extension PokeAPI : TargetType {
                 "offset": String(pageLimit*page) as AnyObject,
             ]
         }
+    }
+
+    var parameterEncoding: ParameterEncoding {
+        return JSONEncoding.default
     }
 
     var sampleData: Data {

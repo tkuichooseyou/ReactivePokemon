@@ -4,13 +4,13 @@ import ReactiveSwift
 
 private protocol ErrorHandlerType {
     func handleError(_ error: Swift.Error)
-    func handleError(_ moyaError: Moya.Error, target: TargetType)
+    func handleError(_ moyaError: MoyaError, target: TargetType)
     func handleAssertionFailure(_ message: String)
     func log(_ message: String)
 }
 
 extension ErrorHandlerType {
-    func handleError(_ moyaError: Moya.Error, target: TargetType) {
+    func handleError(_ moyaError: MoyaError, target: TargetType) {
         switch moyaError {
         case let .imageMapping(response): log("Image mapping error: \(response.description)")
         case let .jsonMapping(response): log(response.description)
@@ -20,7 +20,7 @@ extension ErrorHandlerType {
             case 408: log("Timeout: \(response.description)")
             default: log(response.description)
             }
-        case let .data(response): log(response.description)
+        case .requestMapping: log("Request mapping error")
         case let .underlying(error):
             let error = error as NSError
             switch error.code {
@@ -39,7 +39,7 @@ class ErrorHandler {
         sharedInstance.handleError(error)
     }
 
-    static func handleError(_ moyaError: Moya.Error, target: TargetType) {
+    static func handleError(_ moyaError: MoyaError, target: TargetType) {
         sharedInstance.handleError(moyaError, target: target)
     }
 

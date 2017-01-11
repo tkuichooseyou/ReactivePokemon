@@ -1,33 +1,38 @@
 PODS:
-  - Alamofire (4.0.1)
-  - Argo (3.0.1):
-    - Runes (>= 3.0.0)
-  - Curry (2.3.2)
+  - Alamofire (4.2.0)
+  - Argo (4.1.1):
+    - Runes (>= 4.0.0)
+  - Curry (3.0.0)
   - HanekeSwift (0.10.1)
-  - Moya (8.0.0-beta.2):
-    - Moya/Core (= 8.0.0-beta.2)
-  - Moya/Core (8.0.0-beta.2):
-    - Alamofire (~> 4.0.0)
-    - Result
-  - Moya/ReactiveCocoa (8.0.0-beta.2):
+  - Moya (8.0.0):
+    - Moya/Core (= 8.0.0)
+  - Moya/Core (8.0.0):
+    - Alamofire (~> 4.2.0)
+    - Result (~> 3.1.0)
+  - Moya/ReactiveCocoa (8.0.0):
+    - Moya/ReactiveSwift
+  - Moya/ReactiveSwift (8.0.0):
     - Moya/Core
-    - ReactiveSwift
-  - Nimble (5.0.0)
-  - Quick (0.10.0)
-  - ReactiveSwift (1.0.0-alpha.2):
-    - Result (~> 3.0)
-  - Result (3.0.0)
-  - Runes (3.2.1)
+    - ReactiveSwift (= 1.0.0)
+  - Nimble (5.1.1)
+  - Quick (1.0.0)
+  - ReactiveCocoa (5.0.0-rc.1):
+    - ReactiveSwift (~> 1.0.0-rc.3)
+  - ReactiveSwift (1.0.0):
+    - Result (~> 3.1)
+  - Result (3.1.0)
+  - Runes (4.0.1)
 
 DEPENDENCIES:
   - Argo (from `https://github.com/thoughtbot/Argo.git`)
   - Curry (from `https://github.com/thoughtbot/Curry.git`)
   - HanekeSwift (from `https://github.com/Haneke/HanekeSwift.git`, branch `feature/swift-3`)
-  - Moya (= 8.0.0-beta.2)
+  - Moya
   - Moya/ReactiveCocoa
   - Nimble
   - Quick
-  - ReactiveSwift (= 1.0.0-alpha.2)
+  - ReactiveCocoa (= 5.0.0-rc.1)
+  - ReactiveSwift
   - Runes (from `https://github.com/thoughtbot/Runes.git`)
 
 EXTERNAL SOURCES:
@@ -43,30 +48,31 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Argo:
-    :commit: 4b57653f7760bd3eedfd1c1fbc821bde191e603d
+    :commit: f6f2fdc6c74f2283650abacecbb87113918e0438
     :git: https://github.com/thoughtbot/Argo.git
   Curry:
-    :commit: 408134ffa8dd1c09b0050f65eae300381b934bf6
+    :commit: 863ec7b235448ca53e682cf6958df4c30880c78e
     :git: https://github.com/thoughtbot/Curry.git
   HanekeSwift:
-    :commit: 3fb394f3769303685c9e0e692c9065e6a037b30a
+    :commit: 1157a124ec699f4ad926cb054f1d0bfce88ae7a9
     :git: https://github.com/Haneke/HanekeSwift.git
   Runes:
-    :commit: e00cf681ec03a2dbf2b4cd6dd1e24d522f55474b
+    :commit: 043c8b2d6d4b5aadaf4d81ae331a84084a958667
     :git: https://github.com/thoughtbot/Runes.git
 
 SPEC CHECKSUMS:
-  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
-  Argo: f2e633ac01162010a2c3d8c495a59f5c79abe4d5
-  Curry: a018288326c97dd2e4f5b37e527d20749e4663c5
+  Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
+  Argo: 236db72cb9a2bda9bcf9237423bb783e9c350356
+  Curry: eb3d2c75aec678b3cc7fb2729d2ad6dd121531d1
   HanekeSwift: 4113367892828e7700d24a384027de6ebc79aad1
-  Moya: 920d40f738e6f4ece84010cec701bb9693be8251
-  Nimble: 56fc9f5020effa2206de22c3dd910f4fb011b92f
-  Quick: 5d290df1c69d5ee2f0729956dcf0fd9a30447eaa
-  ReactiveSwift: 967383cc7b58baa05c997965f9a76b7fd796f2a7
-  Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
-  Runes: 6231c760e43f26bd3fe804f15bc08bd1e40e6c46
+  Moya: 850a166ab8241bd1c1cea6dbe012e3a2ad62944a
+  Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
+  Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
+  ReactiveCocoa: 3e9cad4b77fa199d41e03f603cb55d0701ad6ad8
+  ReactiveSwift: f391724ee318a2cfd3e37dfb041cd49ecf4e7869
+  Result: 4e3ed5995ed94d0cd6a09be9a431fce3f3624bbf
+  Runes: a6574421c266aea078b55ef84570e1a2be0f2bf4
 
-PODFILE CHECKSUM: 306e2f91367f4c9fc181de574256bc45b05abdc9
+PODFILE CHECKSUM: c7524fe12e16a33b193fb3bd845f1277473e0163
 
-COCOAPODS: 1.1.0.rc.2
+COCOAPODS: 1.1.1
